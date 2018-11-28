@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "450359726481",
+    "firebase_url": "https://project2-f5c58.firebaseio.com",
+    "project_id": "project2-f5c58",
+    "storage_bucket": "project2-f5c58.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:450359726481:android:46a7b7509d8f40a1",
+        "android_client_info": {
+          "package_name": "edu.fsu.cs.mobile.hw5.project2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "450359726481-tmeclmji8d1i89nmhcdt73qcen752fte.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC11_GOaAsNPRMdSnIrVpVrqTbebofB9JU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
