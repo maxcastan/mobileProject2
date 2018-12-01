@@ -31,8 +31,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent myIntent= new Intent(MainActivity.this, NavActivity.class);
+        startActivity(myIntent);
 
-        db=FirebaseFirestore.getInstance();
+  /*      db=FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
         List<AuthUI.IdpConfig> providers = Arrays.asList(
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                         .createSignInIntentBuilder()
                         .setAvailableProviders(providers)
                         .build(),
-                RC_SIGN_IN);
+                RC_SIGN_IN);*/
     }
 
 
@@ -64,8 +66,7 @@ public class MainActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
 
                                 //add this in with navActivity
-                                Intent myIntent= new Intent(MainActivity.this, NavActivity.class);
-                                startActivity(myIntent);
+
                             }
                         });
 

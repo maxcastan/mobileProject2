@@ -1,31 +1,18 @@
 package edu.fsu.cs.mobile.hw5.project2;
 
-import android.Manifest;
-import android.app.PendingIntent;
+
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.telephony.SmsManager;
-import android.util.Log;
+
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
-import edu.fsu.cs.mobile.hw5.project2.HomeFragment;
-
-/*
-import edu.fsu.cs.mobile.hw5.project2.LocationFragment;
-import edu.fsu.cs.mobile.hw5.project2.SocialFragment;
-*/
 
 public class NavActivity extends AppCompatActivity {
 
@@ -35,15 +22,8 @@ public class NavActivity extends AppCompatActivity {
     private HomeFragment homeFragment;
 
     private SocialFragment socialFragment;
-
-
-    private AdminFragment adminFragment;
     private ProfileFragment profileFragment;
 
-
-
-    private Context context;
-    private String phoneNum;
 
 
     @Override
@@ -69,20 +49,17 @@ public class NavActivity extends AppCompatActivity {
 
 
                     case R.id.nav_home:
-                        mMainNav.setItemBackgroundResource(R.color.colorPrimary);
                         setFragment(homeFragment);
                         return true;
 
 
                     case R.id.nav_social:
-                        mMainNav.setItemBackgroundResource(R.color.colorPrimary);
                         setFragment(socialFragment);
                         return true;
 
 
                     case R.id.nav_profile:
-                        mMainNav.setItemBackgroundResource(R.color.colorPrimary);
-                        setFragment(adminFragment);
+                        setFragment(profileFragment);
                         return true;
 
 
@@ -92,11 +69,6 @@ public class NavActivity extends AppCompatActivity {
                 }
             }
         });
-
-        Intent background = new Intent(context, BackgroundService.class);
-        Toast.makeText(getApplicationContext(), "about to start Service", Toast.LENGTH_LONG)
-                .show();
-        context.startService(background);
 
 
     }

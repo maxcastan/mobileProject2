@@ -62,6 +62,7 @@ public class ProfileFragment extends Fragment {
         usersemail.setError(null);
         usersbday.setError(null);
         usersid.setError(null);
+        usersrank.setError(null);
         /*
         roomNum.setError(null);
         studySubject.setError(null);
