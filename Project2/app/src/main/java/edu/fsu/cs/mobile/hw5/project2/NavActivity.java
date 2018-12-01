@@ -34,10 +34,11 @@ public class NavActivity extends AppCompatActivity {
 
     private HomeFragment homeFragment;
 
-    /* private SocialFragment socialFragment; */
+    private SocialFragment socialFragment;
 
 
     private AdminFragment adminFragment;
+    private ProfileFragment profileFragment;
 
 
 
@@ -53,10 +54,9 @@ public class NavActivity extends AppCompatActivity {
         //the fragments we have
 
         homeFragment=new HomeFragment();
+        socialFragment=new SocialFragment();
 
-        /* socialFragment=new SocialFragment(); */
-
-        adminFragment=new AdminFragment();
+        profileFragment=new ProfileFragment();
 
 
         mMainFrame=(FrameLayout) findViewById(R.id.user_frame);
@@ -73,14 +73,14 @@ public class NavActivity extends AppCompatActivity {
                         setFragment(homeFragment);
                         return true;
 
-                        /*
-                    case R.id.nav_soc:
+
+                    case R.id.nav_social:
                         mMainNav.setItemBackgroundResource(R.color.colorPrimary);
                         setFragment(socialFragment);
                         return true;
-                        */
 
-                    case R.id.nav_admin:
+
+                    case R.id.nav_profile:
                         mMainNav.setItemBackgroundResource(R.color.colorPrimary);
                         setFragment(adminFragment);
                         return true;

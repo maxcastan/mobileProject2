@@ -16,7 +16,7 @@
         android:layout_alignParentStart="true"
         android:background="#A70024"
         app:itemBackground="@color/colorPrimaryDark"
-        app:menu="@menu/nav_items"/>
+        app:menu="@menu/nav_items" />
         <!--
         app:itemIconTint="@color/nav_items_color"
         app:itemTextColor="@color/nav_items_color"-->

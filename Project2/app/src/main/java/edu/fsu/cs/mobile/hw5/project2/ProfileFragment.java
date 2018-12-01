@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -50,7 +51,17 @@ public class ProfileFragment extends Fragment {
         Button update=v.findViewById(R.id.updateBtn);
         */
 
+        final TextView usersfirname = (TextView) v.findViewById(R.id.namehere);
+        final TextView usersemail = (TextView) v.findViewById(R.id.emailhere);
+        final TextView usersbday = (TextView) v.findViewById(R.id.bdayhere);
+        final TextView usersid = (TextView) v.findViewById(R.id.idhere);
+        final TextView usersrank = (TextView) v.findViewById(R.id.rankhere);
 
+
+        usersfirname.setError(null);
+        usersemail.setError(null);
+        usersbday.setError(null);
+        usersid.setError(null);
         /*
         roomNum.setError(null);
         studySubject.setError(null);

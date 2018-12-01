@@ -14,5 +14,9 @@
         android:id="@+id/nav_social"
         android:icon="@drawable/ic_whatshot_black_24dp"
         android:title="@string/social" />
+    <item
+        android:id="@+id/nav_admin"
+        android:icon="@drawable/ic_whatshot_black_24dp"
+        android:title="@string/social" />
 
 </menu>
