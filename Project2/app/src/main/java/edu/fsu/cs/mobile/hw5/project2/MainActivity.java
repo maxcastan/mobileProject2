@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
 
                                 //add this in with navActivity
-                                //Intent myIntent= new Intent(MainActivity.this, NavActivity.class);
-                               // startActivity(myIntent);
+                                Intent myIntent= new Intent(MainActivity.this, NavActivity.class);
+                                startActivity(myIntent);
                             }
                         });
 

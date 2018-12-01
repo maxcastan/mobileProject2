@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Alpha Rho Rho</string>
+    <string name="social">Social</string>
+    <string name="home">Home</string>
+    <string name="admin">Admin</string>
+
 </resources>
