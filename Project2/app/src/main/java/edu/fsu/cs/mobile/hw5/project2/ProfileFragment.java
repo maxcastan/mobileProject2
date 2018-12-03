@@ -43,66 +43,8 @@ public class ProfileFragment extends Fragment {
         setHasOptionsMenu(true);
         final FirebaseUser currentUser=FirebaseAuth.getInstance().getCurrentUser();
 
-        /*
-        final TextView roomNum = (TextView) v.findViewById(R.id.roomInputStr);
-        final TextView studySubject = (TextView) v.findViewById(R.id.subjectInputStr);
-        final RadioButton yes=v.findViewById(R.id.yesRadioBtn);
-        final RadioButton no=v.findViewById(R.id.noRadioBtn);
-        Button update=v.findViewById(R.id.updateBtn);
-        */
-
-        final TextView usersfirname = (TextView) v.findViewById(R.id.namehere);
-        final TextView usersemail = (TextView) v.findViewById(R.id.emailhere);
-        final TextView usersbday = (TextView) v.findViewById(R.id.bdayhere);
-        final TextView usersid = (TextView) v.findViewById(R.id.idhere);
-        final TextView usersrank = (TextView) v.findViewById(R.id.rankhere);
-
-
-        usersfirname.setError(null);
-        usersemail.setError(null);
-        usersbday.setError(null);
-        usersid.setError(null);
-        usersrank.setError(null);
-        /*
-        roomNum.setError(null);
-        studySubject.setError(null);
-        yes.setError(null);
-        no.setError(null);
-        */
-
-        /*
-        update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(studySubject.getText().toString().matches("")){
-                    studySubject.setError("Enter Study subject");
-                }
-                else{
-                    db.collection("Users").document(currentUser.getUid())
-                            .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            DocumentSnapshot doc=task.getResult();
-                            StringBuilder sb = new StringBuilder("");
-
-                            sb.append("Im studying " + studySubject.getText().toString());
-                            sb.append(" at " + doc.getString("location"));
-
-                            if(yes.isChecked()){//they do want to include room #
-                                sb.append(" in room " + roomNum.getText().toString() + ".\n");
-                                sb.append("You can study with me if you want.");
-
-                            }
-                            String response = sb.toString();
-                            message.put("message", response);
-                            db.collection("Users").document(currentUser.getUid()).update(message);
-                        }
-                    });
-
-                }
-            }
-        });
-        */
+        //this lets the fragment know it will have an Options Menu
+        setHasOptionsMenu(true);
 
         return v;
     }
