@@ -12,6 +12,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 123;
     private FirebaseFirestore db=FirebaseFirestore.getInstance();
     private Map<String, Object> user=new HashMap<>();
-    private FirebaseAuth mAuth;
+    private FirebaseAuth mAuth=FirebaseAuth.getInstance();;
 
 
 
@@ -31,11 +32,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent myIntent= new Intent(MainActivity.this, NavActivity.class);
-        startActivity(myIntent);
-
-  /*      db=FirebaseFirestore.getInstance();
-        mAuth = FirebaseAuth.getInstance();
 
         List<AuthUI.IdpConfig> providers = Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build());
@@ -44,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                         .createSignInIntentBuilder()
                         .setAvailableProviders(providers)
                         .build(),
-                RC_SIGN_IN);*/
+                RC_SIGN_IN);
     }
 
 
@@ -59,14 +55,15 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
                 FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-                user.put("Name", currentUser.getDisplayName());
-                db.collection("Users").document(currentUser.getUid()).update(user)
+                user.put("name", currentUser.getDisplayName());
+                user.put("email", currentUser.getEmail());
+                db.collection("Users").document(currentUser.getEmail()).set(user, SetOptions.merge())
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
 
-                                //add this in with navActivity
-
+                                Intent myIntent= new Intent(MainActivity.this, NavActivity.class);
+                                startActivity(myIntent);
                             }
                         });
 
