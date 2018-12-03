@@ -9,51 +9,23 @@
     android:background="@drawable/gradientback"
     tools:context=".ProfileFragment">
 
-    <TextView
-        android:id="@+id/namehere"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="168dp"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/emailhere"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/namehere"
+    <Button
+        android:id="@+id/logoutBtn"
+        android:layout_width="113dp"
+        android:layout_height="59dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="257dp"
-        android:text="TextView" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="42dp"
+        android:text="@string/logoutStr" />
 
-    <TextView
-        android:id="@+id/bdayhere"
+    <EditText
+        android:id="@+id/usernameTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/namehere"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="-2dp"
-        android:layout_marginBottom="193dp"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/idhere"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/namehere"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="144dp"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/rankhere"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/namehere"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="88dp"
-        android:text="TextView" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="195dp"
+        android:contentDescription="user name will go here"
+        android:ems="10"
+        android:inputType="textPersonName" />
 </RelativeLayout>
