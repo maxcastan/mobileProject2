@@ -13,19 +13,111 @@
         android:id="@+id/logoutBtn"
         android:layout_width="113dp"
         android:layout_height="59dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="42dp"
+        android:layout_marginStart="135dp"
+        android:layout_marginEnd="136dp"
+        android:layout_marginBottom="18dp"
         android:text="@string/logoutStr" />
 
     <EditText
-        android:id="@+id/usernameTxt"
-        android:layout_width="wrap_content"
+        android:id="@+id/pUserId"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="195dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="0dp"
         android:contentDescription="user name will go here"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:text="USERID"
+        android:textColor="@android:color/white" />
+
+    <EditText
+        android:id="@+id/pEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pHouse"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="0dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="EMAIL"
+        android:textColor="@android:color/white" />
+
+    <EditText
+        android:id="@+id/pRank"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pName"
+        android:layout_alignStart="@+id/logoutBtn"
+        android:layout_marginStart="-135dp"
+        android:layout_marginTop="2dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:textColor="@android:color/white" />
+
+    <EditText
+        android:id="@+id/pHouse"
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        android:layout_below="@+id/pUserId"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:text="TextView"
+        android:textColor="@android:color/white" />
+
+    <EditText
+        android:id="@+id/pName"
+        style="@android:style/Widget.AutoCompleteTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pEmail"
+        android:layout_alignEnd="@+id/logoutBtn"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="-136dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:singleLine="false"
+        android:text="Name"
+        android:textColor="@android:color/white" />
+
+    <EditText
+        android:id="@+id/pBday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pHouse"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="145dp"
+        android:layout_marginBottom="85dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:textColor="@android:color/white" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        tools:src="@tools:sample/avatars" />
+
 </RelativeLayout>

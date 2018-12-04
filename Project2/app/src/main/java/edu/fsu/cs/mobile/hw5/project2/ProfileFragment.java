@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,6 +31,9 @@ public class ProfileFragment extends Fragment {
     private FirebaseFirestore db=FirebaseFirestore.getInstance();
     private Map<String, Object> message=new HashMap<>();
 
+    EditText userid, emailuser, rank;
+    TextView houseuser , bday, actualName;
+
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -45,6 +49,17 @@ public class ProfileFragment extends Fragment {
 
         //this lets the fragment know it will have an Options Menu
         setHasOptionsMenu(true);
+
+
+        //edit text because these may change and are editable
+        userid = (EditText) getActivity().findViewById(R.id.pUserId);
+        emailuser = (EditText)  getActivity().findViewById(R.id.pEmail);
+        rank = (EditText)  getActivity().findViewById(R.id.pRank);
+
+        //text view bc these do not change
+        bday = (TextView)  getActivity().findViewById(R.id.pBday);
+        houseuser= (TextView)  getActivity().findViewById(R.id.pHouse);
+        actualName = (TextView)  getActivity().findViewById(R.id.pName);
 
         return v;
     }
