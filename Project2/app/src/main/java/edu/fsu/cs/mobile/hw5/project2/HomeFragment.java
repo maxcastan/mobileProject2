@@ -45,8 +45,11 @@ public class HomeFragment extends Fragment {
     private FirebaseFirestore db=FirebaseFirestore.getInstance();
     private Map<String, Object> message=new HashMap<>();
     FirebaseUser currentUser=FirebaseAuth.getInstance().getCurrentUser();
-    private CollectionReference messsageRef=db.collection("Messages");
+    private CollectionReference messsageRef=db.collection("House");
     private MessageAdapter adapter;
+    View v;
+    Query query;
+    String house;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -57,12 +60,11 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v=inflater.inflate(R.layout.fragment_home, container, false);
-        setUpRecyclerView(v, getContext());
+        v=inflater.inflate(R.layout.fragment_home, container, false);
         return v;
     }
     private void setUpRecyclerView(View v, final Context c) {
-        Query query=messsageRef;
+       // query=messsageRef;
              //   .orderBy("time", Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<Message> options=new FirestoreRecyclerOptions.Builder<Message>()
                 .setQuery(query, Message.class)
@@ -78,7 +80,20 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        adapter.startListening();
+
+        DocumentReference user=db.collection("Users").document(currentUser.getEmail());
+        user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot doc=task.getResult();
+                house=doc.getString("house");
+                query=messsageRef.document(house).collection("Messages")
+                .orderBy("timestamp", Query.Direction.DESCENDING);
+                setUpRecyclerView(v, getContext());
+                adapter.startListening();
+            }
+        });
+
     }
 
     @Override
