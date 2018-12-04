@@ -33,8 +33,10 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="foregroundImage" value="$USER_HOME$/Downloads/w2.png" />
-                                      <entry key="foregroundLayerName" value="w2" />
+                                      <entry key="backgroundLayerName" value="ic_launcher_background" />
+                                      <entry key="foregroundImage" value="$USER_HOME$/Downloads/m1.png" />
+                                      <entry key="foregroundLayerName" value="m1" />
+                                      <entry key="outputName" value="m1beard" />
                                     </map>
                                   </option>
                                 </PersistentState>

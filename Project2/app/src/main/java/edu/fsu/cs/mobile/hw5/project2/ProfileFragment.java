@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
@@ -35,6 +36,8 @@ public class ProfileFragment extends Fragment {
     EditText userid, emailuser, rank;
     TextView houseuser , bday, actualName;
 
+    ImageView image;
+
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -48,6 +51,18 @@ public class ProfileFragment extends Fragment {
         //this lets the fragment know it will have an options menu
         setHasOptionsMenu(true);
         final FirebaseUser currentUser=FirebaseAuth.getInstance().getCurrentUser();
+
+
+
+
+        image = (ImageView) getActivity().findViewById(R.id.pImage);
+
+        //male
+        image.setImageResource(R.mipmap.m1);
+
+
+        //female
+        image.setImageResource(R.mipmap.w2);
 
 
 
