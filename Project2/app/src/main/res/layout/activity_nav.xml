@@ -11,7 +11,7 @@
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/user_nav"
         android:layout_width="match_parent"
-        android:layout_height="63dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:background="#A70024"
@@ -21,16 +21,14 @@
         app:itemIconTint="@color/nav_items_color"
         app:itemTextColor="@color/nav_items_color"-->
 
-
-
-
     <FrameLayout
         android:id="@+id/user_frame"
         android:layout_width="match_parent"
-        android:layout_height="451dp"
+        android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="60dp">
+        android:layout_marginBottom="60dp"
+        android:layout_above="@id/user_nav">
 
     </FrameLayout>
 
