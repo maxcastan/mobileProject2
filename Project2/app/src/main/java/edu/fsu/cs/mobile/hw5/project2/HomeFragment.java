@@ -1,10 +1,15 @@
 package edu.fsu.cs.mobile.hw5.project2;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,12 +20,16 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,6 +44,9 @@ public class HomeFragment extends Fragment {
     private FirebaseAuth mAuth=FirebaseAuth.getInstance();
     private FirebaseFirestore db=FirebaseFirestore.getInstance();
     private Map<String, Object> message=new HashMap<>();
+    FirebaseUser currentUser=FirebaseAuth.getInstance().getCurrentUser();
+    private CollectionReference messsageRef=db.collection("Messages");
+    private MessageAdapter adapter;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -46,85 +58,33 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View v=inflater.inflate(R.layout.fragment_home, container, false);
-        setHasOptionsMenu(true);
-        final FirebaseUser currentUser=FirebaseAuth.getInstance().getCurrentUser();
-
-        /*
-        final TextView roomNum = (TextView) v.findViewById(R.id.roomInputStr);
-        final TextView studySubject = (TextView) v.findViewById(R.id.subjectInputStr);
-        final RadioButton yes=v.findViewById(R.id.yesRadioBtn);
-        final RadioButton no=v.findViewById(R.id.noRadioBtn);
-        Button update=v.findViewById(R.id.updateBtn);
-        */
-
-
-        /*
-        roomNum.setError(null);
-        studySubject.setError(null);
-        yes.setError(null);
-        no.setError(null);
-        */
-
-        /*
-        update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(studySubject.getText().toString().matches("")){
-                    studySubject.setError("Enter Study subject");
-                }
-                else{
-                    db.collection("Users").document(currentUser.getUid())
-                            .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            DocumentSnapshot doc=task.getResult();
-                            StringBuilder sb = new StringBuilder("");
-
-                            sb.append("Im studying " + studySubject.getText().toString());
-                            sb.append(" at " + doc.getString("location"));
-
-                            if(yes.isChecked()){//they do want to include room #
-                                sb.append(" in room " + roomNum.getText().toString() + ".\n");
-                                sb.append("You can study with me if you want.");
-
-                            }
-                            String response = sb.toString();
-                            message.put("message", response);
-                            db.collection("Users").document(currentUser.getUid()).update(message);
-                        }
-                    });
-
-                }
-            }
-        });
-        */
-
+        setUpRecyclerView(v, getContext());
         return v;
     }
+    private void setUpRecyclerView(View v, final Context c) {
+        Query query=messsageRef;
+             //   .orderBy("time", Query.Direction.DESCENDING);
+        FirestoreRecyclerOptions<Message> options=new FirestoreRecyclerOptions.Builder<Message>()
+                .setQuery(query, Message.class)
+                .build();
+        adapter=new MessageAdapter(options);
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
-        inflater.inflate(R.menu.logout_button, menu);
+        RecyclerView recyclerView=v.findViewById(R.id.social_recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(c));
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
-    public  boolean onOptionsItemSelected(MenuItem menuItem){
-        switch (menuItem.getItemId()){
-            case R.id.logout:
-                logout();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(menuItem);
-        }
-
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
     }
 
-    private void logout() {
-        mAuth.signOut();
-        Intent myIntent = new Intent(getActivity(), MainActivity.class);
-        startActivity(myIntent);
-        getActivity().finish();
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 
 }
