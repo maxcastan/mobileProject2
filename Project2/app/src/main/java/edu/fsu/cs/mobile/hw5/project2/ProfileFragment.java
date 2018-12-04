@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -44,11 +45,10 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View v=inflater.inflate(R.layout.fragment_profile, container, false);
+        //this lets the fragment know it will have an options menu
         setHasOptionsMenu(true);
         final FirebaseUser currentUser=FirebaseAuth.getInstance().getCurrentUser();
 
-        //this lets the fragment know it will have an Options Menu
-        setHasOptionsMenu(true);
 
 
         //edit text because these may change and are editable
@@ -66,7 +66,9 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
-        inflater.inflate(R.menu.logout_button, menu);
+        inflater.inflate(R.menu.profile_menu, menu);
+
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -90,7 +92,11 @@ public class ProfileFragment extends Fragment {
 
     }
 
+ 
     //edit this method later on
+
+    //the code for this method should be changed
+
     private void logout() {
         /*
         mAuth.signOut();
