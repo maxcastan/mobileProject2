@@ -72,8 +72,16 @@ public class ProfileFragment extends Fragment {
     @Override
     public  boolean onOptionsItemSelected(MenuItem menuItem){
         switch (menuItem.getItemId()){
-            case R.id.logout:
+            case R.id.logout_option:
                 logout();
+                return true;
+
+            case R.id.update_option:
+                updateAccount();
+                return true;
+
+            case R.id.delete_option:
+                deleteAccount();
                 return true;
 
             default:
@@ -82,11 +90,22 @@ public class ProfileFragment extends Fragment {
 
     }
 
+    //edit this method later on
     private void logout() {
+        /*
         mAuth.signOut();
         Intent myIntent = new Intent(getActivity(), MainActivity.class);
         startActivity(myIntent);
         getActivity().finish();
+        */
+    }
+
+    private void updateAccount(){
+        //code here
+    }
+
+    private void deleteAccount(){
+        //code here
     }
 
 }
