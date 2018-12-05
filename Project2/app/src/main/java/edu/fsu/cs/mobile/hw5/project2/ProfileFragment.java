@@ -4,6 +4,7 @@ package edu.fsu.cs.mobile.hw5.project2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,11 +23,15 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+import static edu.fsu.cs.mobile.hw5.project2.R.mipmap.m1beard;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ProfileFragment extends Fragment {
+
+
 
 
     private FirebaseAuth mAuth=FirebaseAuth.getInstance();
@@ -47,29 +52,46 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        Log.i("this is working 1:  " , "1");
+
+
         View v=inflater.inflate(R.layout.fragment_profile, container, false);
+
+
+        Log.i("this is working 2:  " , "2");
+
         //this lets the fragment know it will have an options menu
         setHasOptionsMenu(true);
         final FirebaseUser currentUser=FirebaseAuth.getInstance().getCurrentUser();
 
 
+        Log.i("this is working 3:  " , "3");
 
+        image = (ImageView) v.findViewById(R.id.pImg);
 
-        image = (ImageView) getActivity().findViewById(R.id.pImage);
+        Log.i("this is working 3.1:  " , "3.1");
+
 
         //male
-        image.setImageResource(R.mipmap.m1);
+        image.setImageResource(R.mipmap.m1beard);
+        //Resource(m1beard);
+
+        Log.i("this is working 3.2:  " , "3.2");
 
 
         //female
-        image.setImageResource(R.mipmap.w2);
+        //image.setImageResource(R.mipmap.w2);
 
+        Log.i("this is working 4:  " , "4");
 
 
         //edit text because these may change and are editable
         userid = (EditText) getActivity().findViewById(R.id.pUserId);
         emailuser = (EditText)  getActivity().findViewById(R.id.pEmail);
         rank = (EditText)  getActivity().findViewById(R.id.pRank);
+
+
+        Log.i("this is working 5:  " , "5");
 
         //text view bc these do not change
         bday = (TextView)  getActivity().findViewById(R.id.pBday);
@@ -83,7 +105,11 @@ public class ProfileFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
         inflater.inflate(R.menu.profile_menu, menu);
 
+        Log.i("this is working 6:  " , "6");
+
         super.onCreateOptionsMenu(menu, inflater);
+
+        Log.i("this is working 7:  " , "7");
     }
 
     @Override

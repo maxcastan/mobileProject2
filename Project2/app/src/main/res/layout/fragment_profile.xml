@@ -111,7 +111,7 @@
         android:textColor="@android:color/white" />
 
     <ImageView
-        android:id="@+id/pImage"
+        android:id="@+id/pImg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
