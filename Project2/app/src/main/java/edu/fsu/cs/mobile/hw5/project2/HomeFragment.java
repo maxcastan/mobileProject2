@@ -49,9 +49,9 @@ public class HomeFragment extends Fragment {
     FirebaseUser currentUser=FirebaseAuth.getInstance().getCurrentUser();
     private CollectionReference messsageRef=db.collection("House");
     private MessageAdapter adapter;
-    View v;
-    Query query;
-    String house;
+    private View v;
+    private Query query;
+    private String house;
 
     public HomeFragment() {
         // Required empty public constructor
