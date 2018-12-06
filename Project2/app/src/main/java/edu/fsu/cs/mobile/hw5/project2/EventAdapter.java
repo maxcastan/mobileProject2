@@ -28,7 +28,7 @@ public class EventAdapter extends FirestoreRecyclerAdapter <Event, EventAdapter.
     protected void onBindViewHolder(@NonNull EventHolder holder, int position, @NonNull Event model) {
         holder.title.setText(model.getTitle());
         holder.address.setText(model.getAddress());
-        holder.timestamp.setText(model.getTimestamp());
+        holder.timestamp.setText(model.getTimestamp().toDate().toString());
     }
 
     @NonNull
