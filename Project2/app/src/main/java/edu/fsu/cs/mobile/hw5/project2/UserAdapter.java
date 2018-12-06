@@ -11,7 +11,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
 
-public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.userHolder> {
+public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.UserHolder> {
 
     private OnItemClickListener listener;
 
@@ -23,6 +23,12 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.user
     protected void onBindViewHolder(@NonNull UserHolder holder, int position, @NonNull User model) {
         holder.username.setText(model.getUserName());
         holder.housename.setText(model.getHouseName());
+    }
+
+    @NonNull
+    @Override
+    public UserHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return null;
     }
 
     /*              NOT SURE WHAT TO REPLACE R.LAYOUT.MESSAGE_CARD WITH
