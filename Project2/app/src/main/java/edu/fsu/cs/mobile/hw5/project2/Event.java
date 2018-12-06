@@ -1,17 +1,21 @@
 package edu.fsu.cs.mobile.hw5.project2;
 
+import com.google.firebase.firestore.ServerTimestamp;
+import com.google.type.Date;
+
+import java.sql.Time;
 import java.sql.Timestamp;
 
 public class Event {
 
     private String title;
     private String address;
-    private String timestamp;
+    private com.google.firebase.Timestamp timestamp;
 
     public Event() {
     }
 
-    public Event(String title, String address, String timestamp) {
+    public Event(String title, String address, com.google.firebase.Timestamp timestamp) {
         this.title = title;
         this.address = address;
         this.timestamp = timestamp;
@@ -25,7 +29,7 @@ public class Event {
         return address;
     }
 
-    public String getTimestamp() {
+    public com.google.firebase.Timestamp getTimestamp() {
         return timestamp;
     }
 }
