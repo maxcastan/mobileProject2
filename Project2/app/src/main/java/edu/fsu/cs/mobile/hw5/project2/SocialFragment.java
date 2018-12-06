@@ -75,6 +75,20 @@ public class SocialFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(c));
         recyclerView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new MessageAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+                EventMessageFragment eventMessageFragment=new EventMessageFragment();
+                Bundle bundle=new Bundle();
+                bundle.putString("eventID", documentSnapshot.getId());
+                eventMessageFragment.setArguments(bundle);
+                FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.user_frame, eventMessageFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
     }
 
     @Override
