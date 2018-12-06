@@ -62,7 +62,8 @@ public class EventMessageFragment extends Fragment {
         return v;
     }
     private void setUpRecyclerView(View v, final Context c) {
-        query=messsageRef.document(eventID).collection("Messages");
+        query=messsageRef.document(eventID).collection("Messages")
+                .orderBy("timestamp", Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<Message> options=new FirestoreRecyclerOptions.Builder<Message>()
                 .setQuery(query, Message.class)
                 .build();

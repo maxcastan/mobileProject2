@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -24,7 +25,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.ServerTimestamp;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -94,7 +97,9 @@ public class SocialFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        query=eventRef;
+        query=eventRef
+                .orderBy("timestamp", Query.Direction.ASCENDING);
+
         setUpRecyclerView(v, getContext());
         adapter.startListening();
 

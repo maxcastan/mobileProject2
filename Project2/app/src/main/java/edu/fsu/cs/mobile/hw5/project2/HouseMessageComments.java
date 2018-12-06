@@ -71,7 +71,8 @@ public class HouseMessageComments extends Fragment {
 
     private void setUpRecyclerView(View v, final Context c) {
         query=messsageRef.document(house).collection("Messages").document(commentID)
-                .collection("Comments");
+                .collection("Comments")
+                .orderBy("timestamp", Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<Message> options=new FirestoreRecyclerOptions.Builder<Message>()
                 .setQuery(query, Message.class)
                 .build();
