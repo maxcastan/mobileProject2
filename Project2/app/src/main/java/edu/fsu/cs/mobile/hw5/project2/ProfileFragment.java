@@ -4,6 +4,7 @@ package edu.fsu.cs.mobile.hw5.project2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -42,6 +44,8 @@ public class ProfileFragment extends Fragment {
     TextView houseuser , bday, actualName;
 
     ImageView image;
+
+    Button requestBtn;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -97,6 +101,21 @@ public class ProfileFragment extends Fragment {
         bday = (TextView)  getActivity().findViewById(R.id.pBday);
         houseuser= (TextView)  getActivity().findViewById(R.id.pHouse);
         actualName = (TextView)  getActivity().findViewById(R.id.pName);
+        requestBtn = v.findViewById(R.id.requestBtn);
+
+
+        //listener for REQUEST button
+        requestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RequestFragment requestFragment = new RequestFragment();
+                FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.user_frame, requestFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
 
         return v;
     }

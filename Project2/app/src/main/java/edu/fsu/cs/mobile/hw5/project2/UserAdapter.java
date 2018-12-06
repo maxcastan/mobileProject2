@@ -21,35 +21,37 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.User
 
     @Override
     protected void onBindViewHolder(@NonNull UserHolder holder, int position, @NonNull User model) {
-        holder.username.setText(model.getUserName());
-        holder.housename.setText(model.getHouseName());
+        holder.userEmail.setText(model.getUserEmail());
+        holder.userName.setText(model.getUserName());
     }
 
     @NonNull
     @Override
     public UserHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return null;
+        View v=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.user_card,
+                viewGroup, false);
+        return new UserHolder(v);
+
     }
+
 
     /*              NOT SURE WHAT TO REPLACE R.LAYOUT.MESSAGE_CARD WITH
     @NonNull
     @Override
     public UserHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.message_card,
-                viewGroup, false);
-        return new UserHolder(v);
+
     }
     */
 
 
     class UserHolder extends RecyclerView.ViewHolder {
-        TextView username;//number
-        TextView housename; //message
+        TextView userEmail;//number
+        TextView userName; //message
 
         public UserHolder(View itemView) {
             super(itemView);
-            username = itemView.findViewById(R.id.text_title);
-            housename = itemView.findViewById(R.id.text_description);
+            userEmail = itemView.findViewById(R.id.email_description);
+            userName = itemView.findViewById(R.id.user_description);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
