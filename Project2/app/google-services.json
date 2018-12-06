@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "450359726481-6vb1ac560n63qe8n7hpotc58gtuf49p2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.fsu.cs.mobile.hw5.project2",
+            "certificate_hash": "a25059c81aca5984fb22a2e1b867499f6d9f306c"
+          }
+        },
+        {
+          "client_id": "450359726481-58ng0t3tmk3shapm00qhlm2kk4hjv2lq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.fsu.cs.mobile.hw5.project2",
+            "certificate_hash": "baeeeb7c4d8455e9b907029e80e91656b68b34b9"
+          }
+        },
+        {
           "client_id": "450359726481-tmeclmji8d1i89nmhcdt73qcen752fte.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +45,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "450359726481-tmeclmji8d1i89nmhcdt73qcen752fte.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
