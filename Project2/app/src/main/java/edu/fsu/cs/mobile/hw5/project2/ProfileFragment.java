@@ -56,37 +56,31 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Log.i("this is working 1:  " , "1");
 
 
         View v=inflater.inflate(R.layout.fragment_profile, container, false);
 
 
-        Log.i("this is working 2:  " , "2");
 
         //this lets the fragment know it will have an options menu
         setHasOptionsMenu(true);
         final FirebaseUser currentUser=FirebaseAuth.getInstance().getCurrentUser();
 
 
-        Log.i("this is working 3:  " , "3");
 
         image = (ImageView) v.findViewById(R.id.pImg);
 
-        Log.i("this is working 3.1:  " , "3.1");
 
 
         //male
         image.setImageResource(R.mipmap.m1beard);
         //Resource(m1beard);
 
-        Log.i("this is working 3.2:  " , "3.2");
 
 
         //female
         //image.setImageResource(R.mipmap.w2);
 
-        Log.i("this is working 4:  " , "4");
 
 
         //edit text because these may change and are editable
@@ -95,7 +89,6 @@ public class ProfileFragment extends Fragment {
         rank = (EditText)  getActivity().findViewById(R.id.pRank);
 
 
-        Log.i("this is working 5:  " , "5");
 
         //text view bc these do not change
         bday = (TextView)  getActivity().findViewById(R.id.pBday);
