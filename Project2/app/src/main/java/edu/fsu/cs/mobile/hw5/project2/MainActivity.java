@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 123;
     private FirebaseFirestore db=FirebaseFirestore.getInstance();
     private Map<String, Object> user=new HashMap<>();
-    private FirebaseAuth mAuth=FirebaseAuth.getInstance();;
+    private FirebaseAuth mAuth=FirebaseAuth.getInstance();
 
 
 
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                 user.put("name", currentUser.getDisplayName());
                 user.put("email", currentUser.getEmail());
-                user.put("house", "APP");
+                user.put("id", currentUser.getUid());
                 db.collection("Users").document(currentUser.getEmail()).set(user, SetOptions.merge())
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }//end of onActivityResult
-
+/*
     @Override
     public void onStart(){
         super.onStart();
@@ -88,5 +88,5 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
     }
-
+*/
 }//end of Main

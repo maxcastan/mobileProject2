@@ -110,6 +110,9 @@ public class HomeFragment extends Fragment {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 DocumentSnapshot doc=task.getResult();
                 house=doc.getString("house");
+                if(house==null){
+                    house="APP";
+                }
                 query=messsageRef.document(house).collection("Messages")
                 .orderBy("timestamp", Query.Direction.DESCENDING);
                 setUpRecyclerView(v, getContext());

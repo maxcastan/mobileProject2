@@ -3,7 +3,9 @@ package edu.fsu.cs.mobile.hw5.project2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,14 +13,20 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,12 +44,18 @@ public class ProfileFragment extends Fragment {
 
     private FirebaseAuth mAuth=FirebaseAuth.getInstance();
     private FirebaseFirestore db=FirebaseFirestore.getInstance();
-    private Map<String, Object> message=new HashMap<>();
+    private Map<String, Object> user=new HashMap<>();
+    private FirebaseUser currentUser=FirebaseAuth.getInstance().getCurrentUser();
 
     EditText userid, emailuser, rank;
     TextView houseuser , bday, actualName;
+    String house, birthday, rankUser;//String variables that will store Firestore data
+    String email=currentUser.getEmail();//user's email already grabbed
+    String name=currentUser.getDisplayName();//user's name already grabbed
 
     ImageView image;
+
+    Button requestBtn;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -52,37 +66,31 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Log.i("this is working 1:  " , "1");
 
 
         View v=inflater.inflate(R.layout.fragment_profile, container, false);
 
 
-        Log.i("this is working 2:  " , "2");
 
         //this lets the fragment know it will have an options menu
         setHasOptionsMenu(true);
         final FirebaseUser currentUser=FirebaseAuth.getInstance().getCurrentUser();
 
 
-        Log.i("this is working 3:  " , "3");
 
         image = (ImageView) v.findViewById(R.id.pImg);
 
-        Log.i("this is working 3.1:  " , "3.1");
 
 
         //male
         image.setImageResource(R.mipmap.m1beard);
         //Resource(m1beard);
 
-        Log.i("this is working 3.2:  " , "3.2");
 
 
         //female
         //image.setImageResource(R.mipmap.w2);
 
-        Log.i("this is working 4:  " , "4");
 
 
         //edit text because these may change and are editable
@@ -91,12 +99,26 @@ public class ProfileFragment extends Fragment {
         rank = (EditText)  getActivity().findViewById(R.id.pRank);
 
 
-        Log.i("this is working 5:  " , "5");
 
         //text view bc these do not change
         bday = (TextView)  getActivity().findViewById(R.id.pBday);
         houseuser= (TextView)  getActivity().findViewById(R.id.pHouse);
         actualName = (TextView)  getActivity().findViewById(R.id.pName);
+        requestBtn = v.findViewById(R.id.requestBtn);
+
+
+        //listener for REQUEST button
+        requestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RequestFragment requestFragment = new RequestFragment();
+                FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.user_frame, requestFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
 
         return v;
     }
@@ -155,4 +177,28 @@ public class ProfileFragment extends Fragment {
         //code here
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        DocumentReference user=db.collection("Users").document(currentUser.getEmail());//chooses User's document
+        user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {//gets data from document
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot doc=task.getResult();//when complete grabs the result
+                house=doc.getString("house");//gets house
+                if(house==null){//if house hasn't been defined yet, set to undefined
+                    house="Undefined";
+                }
+                birthday=doc.getString("birthday");//
+                if(house==null){//if birthday hasn't been defined, set ""
+                    birthday="";
+                }
+                rankUser=doc.getString("rank");
+                if(rankUser==null){//if rank hasn't been defined yet
+                    rankUser="";
+                }
+
+            }
+        });
+    }
 }

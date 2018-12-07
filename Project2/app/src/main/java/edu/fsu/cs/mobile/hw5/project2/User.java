@@ -5,25 +5,25 @@ import java.sql.Timestamp;
 
 public class User {
 
+    private String userEmail;
     private String userName;
-    private String houseName;
 
     public User(){
         //empty constructor needed for firebase
     }
 
-    public User(String userName, String houseName){
+    public User(String userEmail, String userName){
+        this.userEmail = userEmail;
         this.userName = userName;
-        this.houseName = houseName;
     }
 
     //this must be the name of the method for firebase to work properly
-    public String getUserName(){
-        return userName;
+    public String getUserEmail(){
+        return userEmail;
     }
 
     //same applies here
-    public String getHouseName(){
-        return houseName;
+    public String getUserName(){
+        return userName;
     }
 }
