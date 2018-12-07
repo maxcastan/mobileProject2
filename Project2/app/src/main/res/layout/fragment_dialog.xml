@@ -1,52 +1,88 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     tools:context="edu.fsu.cs.mobile.hw5.project2.MyDialogFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <EditText
-        android:id="@+id/name"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="19dp"
-        android:text="Name of the Event" />
 
     <Spinner
-        android:id="@+id/spinner3"
+        android:id="@+id/HousesList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="176dp" />
+        android:layout_below="@+id/Houses"
+        android:layout_marginTop="32dp" />
 
     <TextView
         android:id="@+id/Houses"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/spinner3"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="14dp"
-        android:layout_marginStart="11dp"
-        android:text="Houses" />
+        android:layout_below="@+id/NameEvent"
+        android:layout_marginTop="27dp"
+        android:text="Select Houses" />
 
-    <TextClock
-        android:id="@+id/textClock2"
+    <EditText
+        android:id="@+id/NameEvent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/Houses"
-        android:layout_below="@+id/Time"
-        android:layout_marginTop="17dp" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:ems="10" />
 
     <TextView
-        android:id="@+id/Time"
+        android:id="@+id/EventLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/Houses"
-        android:layout_marginTop="37dp"
-        android:text="Time" />
+        android:layout_below="@+id/HousesList"
+        android:layout_marginTop="33dp"
+        android:text="Enter Event Location" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/enterLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/EventLocation"
+        android:layout_alignBottom="@+id/EventLocation"
+        android:layout_alignParentEnd="true"
+        android:ems="10" />
+
+    <Button
+        android:id="@+id/buttonDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/Houses"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="296dp"
+        android:text="setDate"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/buttonTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/buttonDate"
+        android:layout_alignBottom="@+id/buttonDate"
+        android:layout_alignParentEnd="true"
+        android:text="Set Time"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/mDateDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonTime"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="13dp" />
+
+    <TextView
+        android:id="@+id/mTimeDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/mDateDisplay"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="11dp"/>
+
+
+</RelativeLayout>

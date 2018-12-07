@@ -35,7 +35,7 @@ import java.util.Map;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SocialFragment extends Fragment {
+public class SocialFragment extends Fragment {//implements MyDialogFragment.MyDialogFragmentListener{
 
     private FirebaseAuth mAuth=FirebaseAuth.getInstance();
     private FirebaseFirestore db=FirebaseFirestore.getInstance();
@@ -61,7 +61,8 @@ public class SocialFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                MyDialogFragment mdf = new MyDialogFragment();
+                mdf.show(getFragmentManager(), MyDialogFragment.TAG);
             }
         });
 
@@ -110,5 +111,9 @@ public class SocialFragment extends Fragment {
     public void onStop() {
         super.onStop();
         adapter.stopListening();
+    }
+
+    public void onNewEvent(String event){
+
     }
 }
