@@ -3,6 +3,7 @@ package edu.fsu.cs.mobile.hw5.project2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -18,9 +19,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,10 +44,14 @@ public class ProfileFragment extends Fragment {
 
     private FirebaseAuth mAuth=FirebaseAuth.getInstance();
     private FirebaseFirestore db=FirebaseFirestore.getInstance();
-    private Map<String, Object> message=new HashMap<>();
+    private Map<String, Object> user=new HashMap<>();
+    private FirebaseUser currentUser=FirebaseAuth.getInstance().getCurrentUser();
 
     EditText userid, emailuser, rank;
     TextView houseuser , bday, actualName;
+    String house, birthday, rankUser;//String variables that will store Firestore data
+    String email=currentUser.getEmail();//user's email already grabbed
+    String name=currentUser.getDisplayName();//user's name already grabbed
 
     ImageView image;
 
@@ -167,4 +177,28 @@ public class ProfileFragment extends Fragment {
         //code here
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        DocumentReference user=db.collection("Users").document(currentUser.getEmail());//chooses User's document
+        user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {//gets data from document
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot doc=task.getResult();//when complete grabs the result
+                house=doc.getString("house");//gets house
+                if(house==null){//if house hasn't been defined yet, set to undefined
+                    house="Undefined";
+                }
+                birthday=doc.getString("birthday");//
+                if(house==null){//if birthday hasn't been defined, set ""
+                    birthday="";
+                }
+                rankUser=doc.getString("rank");
+                if(rankUser==null){//if rank hasn't been defined yet
+                    rankUser="";
+                }
+
+            }
+        });
+    }
 }
