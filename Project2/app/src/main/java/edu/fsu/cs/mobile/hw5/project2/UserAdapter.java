@@ -9,11 +9,15 @@ import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.UserHolder> {
 
     private OnItemClickListener listener;
+    private FirebaseFirestore db=FirebaseFirestore.getInstance();
 
     public UserAdapter(@NonNull FirestoreRecyclerOptions<User> options) {
         super(options);
@@ -32,6 +36,19 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.User
                 viewGroup, false);
         return new UserHolder(v);
 
+    }
+
+    public void approveUser(final int adapterPosition, final String house) {
+        getSnapshots().getSnapshot(adapterPosition).getReference().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot doc=task.getResult();
+                String email=doc.getString("userEmail");
+                db.collection("Users").document(email).update("house", house);
+                getSnapshots().getSnapshot(adapterPosition).getReference().delete();
+
+            }
+        });
     }
 
 

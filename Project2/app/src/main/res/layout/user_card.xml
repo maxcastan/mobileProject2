@@ -1,26 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    app:cardBackgroundColor="#FFFFFF">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/user_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="user"
-            android:textSize="22sp" />
-
+        android:layout_height="match_parent"
+        android:padding="8dp">
         <TextView
             android:id="@+id/email_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/user_description"
-            android:text="house"
-            android:textSize="22sp" />
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="User"
+            />
+        <TextView
+            android:id="@+id/user_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Message"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/email_description"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+
     </RelativeLayout>
 </android.support.v7.widget.CardView>
