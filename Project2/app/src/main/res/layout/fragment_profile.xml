@@ -33,6 +33,7 @@
         android:layout_marginEnd="0dp"
         android:contentDescription="user name will go here"
         android:ems="10"
+        android:gravity="center_horizontal"
         android:inputType="textPersonName"
         android:text="USERID"
         android:textColor="@android:color/white" />
@@ -49,6 +50,7 @@
         android:layout_marginTop="2dp"
         android:layout_marginEnd="0dp"
         android:ems="10"
+        android:gravity="center_horizontal"
         android:inputType="textPersonName"
         android:text="EMAIL"
         android:textColor="@android:color/white" />
@@ -62,6 +64,7 @@
         android:layout_marginStart="-135dp"
         android:layout_marginTop="2dp"
         android:ems="10"
+        android:gravity="center_horizontal"
         android:inputType="textPersonName"
         android:text="Name"
         android:textColor="@android:color/white" />
@@ -76,6 +79,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
+        android:gravity="center_horizontal"
         android:text="TextView"
         android:textColor="@android:color/white" />
 
@@ -90,6 +94,7 @@
         android:layout_marginTop="2dp"
         android:layout_marginEnd="-136dp"
         android:ems="10"
+        android:gravity="center_horizontal"
         android:inputType="textPersonName"
         android:singleLine="false"
         android:text="Name"
@@ -106,17 +111,18 @@
         android:layout_marginTop="145dp"
         android:layout_marginBottom="85dp"
         android:ems="10"
+        android:gravity="center_horizontal"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="Bday"
         android:textColor="@android:color/white" />
 
     <ImageView
         android:id="@+id/pImg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="9dp"
         tools:src="@tools:sample/avatars" />
 
 </RelativeLayout>
