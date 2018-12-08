@@ -13,12 +13,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +34,7 @@ import com.google.firebase.firestore.Query;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 import static edu.fsu.cs.mobile.hw5.project2.R.mipmap.m1beard;
 
 
@@ -56,6 +60,8 @@ public class ProfileFragment extends Fragment {
     ImageView image;
 
     Button requestBtn;
+
+    Animation slideup;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -94,16 +100,20 @@ public class ProfileFragment extends Fragment {
 
 
         //edit text because these may change and are editable
-        userid = (EditText) getActivity().findViewById(R.id.pUserId);
-        emailuser = (EditText)  getActivity().findViewById(R.id.pEmail);
-        rank = (EditText)  getActivity().findViewById(R.id.pRank);
+        userid = (EditText) v.findViewById(R.id.pUserId);
+        emailuser = (EditText)  v.findViewById(R.id.pEmail);
+        rank = (EditText)  v.findViewById(R.id.pRank);
 
 
 
         //text view bc these do not change
-        bday = (TextView)  getActivity().findViewById(R.id.pBday);
-        houseuser= (TextView)  getActivity().findViewById(R.id.pHouse);
-        actualName = (TextView)  getActivity().findViewById(R.id.pName);
+        bday = (TextView)  v.findViewById(R.id.pBday);
+        houseuser= (TextView)  v.findViewById(R.id.pHouse);
+        actualName = (TextView)  v.findViewById(R.id.pName);
+
+
+        actualName.setText("lala");
+
         requestBtn = v.findViewById(R.id.requestBtn);
 
 
@@ -120,6 +130,28 @@ public class ProfileFragment extends Fragment {
         });
 
 
+
+        slideup = AnimationUtils.loadAnimation(getActivity(),
+                R.anim.slide_up);
+
+
+        // Slide Up
+        actualName.startAnimation(slideup);
+        rank.startAnimation(slideup);
+        userid.startAnimation(slideup);
+        emailuser.startAnimation(slideup);
+        bday.startAnimation(slideup);
+        houseuser.startAnimation(slideup);
+        /*
+        btnSlideUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtSlideUp.startAnimation(animSlideUp);
+            }
+        });
+
+*/
+
         return v;
     }
 
@@ -127,11 +159,7 @@ public class ProfileFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
         inflater.inflate(R.menu.profile_menu, menu);
 
-        Log.i("this is working 6:  " , "6");
-
         super.onCreateOptionsMenu(menu, inflater);
-
-        Log.i("this is working 7:  " , "7");
     }
 
     @Override

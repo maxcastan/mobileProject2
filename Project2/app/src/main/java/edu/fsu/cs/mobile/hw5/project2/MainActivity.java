@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
@@ -26,12 +29,19 @@ public class MainActivity extends AppCompatActivity {
     private Map<String, Object> user=new HashMap<>();
     private FirebaseAuth mAuth=FirebaseAuth.getInstance();
 
-
+    TextView ti;
+    Animation homeAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ti = (TextView) findViewById(R.id.title);
+
+        homeAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up);
+
+        ti.startAnimation(homeAnimation);
 
         List<AuthUI.IdpConfig> providers = Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build());
