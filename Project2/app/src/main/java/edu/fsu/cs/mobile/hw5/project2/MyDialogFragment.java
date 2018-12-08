@@ -18,6 +18,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -42,7 +43,7 @@ public class MyDialogFragment extends DialogFragment{
     private int mDay;
 
 
-
+    Spinner housespinner;
 
 
     public interface MyDialogListener {
@@ -73,6 +74,11 @@ public class MyDialogFragment extends DialogFragment{
         mTimeDisplay = rootView.findViewById(R.id.mTimeDisplay);
         mDateDisplay = rootView.findViewById(R.id.mDateDisplay);
 
+
+        //spinner
+        housespinner = rootView.findViewById(R.id.HousesList);
+
+        String[] housesInArray = getResources().getStringArray(R.array.housesarray);
 
         setDate.setOnClickListener(new View.OnClickListener() {
             @Override
