@@ -13,4 +13,10 @@
     <string name="deleteMenuStr">Delete Account</string>
     <string name="requestStr">REQUEST</string>
 
+    <string-array
+        name="housesarray">
+        <item>Alpha Rho Rho</item>
+        <item>Delta Tau Epsilon</item>
+        <item>Rho Kappa Gamma</item>
+    </string-array>
 </resources>
