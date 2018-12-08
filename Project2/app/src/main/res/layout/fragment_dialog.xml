@@ -7,18 +7,20 @@
 
     <Spinner
         android:id="@+id/HousesList"
-        android:layout_width="match_parent"
+        android:layout_width="339dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/Houses"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="26dp"
         android:layout_marginTop="32dp" />
 
     <TextView
         android:id="@+id/Houses"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/NameEvent"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="21dp"
         android:layout_marginTop="27dp"
         android:text="Select Houses" />
 
@@ -28,15 +30,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="11dp"
         android:ems="10" />
 
     <TextView
         android:id="@+id/EventLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/HousesList"
-        android:layout_marginTop="33dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="34dp"
         android:text="Enter Event Location" />
 
     <EditText
@@ -65,6 +70,8 @@
         android:layout_alignBaseline="@+id/buttonDate"
         android:layout_alignBottom="@+id/buttonDate"
         android:layout_alignParentEnd="true"
+        android:layout_marginEnd="19dp"
+        android:layout_marginBottom="0dp"
         android:text="Set Time"
         android:visibility="visible" />
 
@@ -82,7 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/mDateDisplay"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="11dp"/>
+        android:layout_marginEnd="11dp" />
 
 
 </RelativeLayout>
