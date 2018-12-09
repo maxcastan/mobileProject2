@@ -81,8 +81,4 @@ public class NavActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
 }

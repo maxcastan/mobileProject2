@@ -22,19 +22,19 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/NameEvent"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="139dp"
+        android:layout_marginStart="21dp"
         android:layout_marginTop="27dp"
         android:text="Select Houses"
         android:textColor="@android:color/darker_gray" />
 
     <EditText
         android:id="@+id/NameEvent"
-        android:layout_width="304dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="11dp"
         android:ems="10"
         android:gravity="center_horizontal"
         android:textColor="@android:color/black" />
@@ -45,62 +45,56 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/HousesList"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="125dp"
-        android:layout_marginTop="45dp"
-        android:text="Enter Event Location"
-        android:textColor="@android:color/darker_gray" />
-
-    <Button
-        android:id="@+id/buttonDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/Houses"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="296dp"
-        android:layout_marginEnd="84dp"
-        android:text="setDate"
-        android:visibility="visible" />
-
-    <Button
-        android:id="@+id/buttonTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="223dp"
-        android:layout_marginLeft="160dp"
-        android:layout_marginTop="295dp"
-        android:layout_marginEnd="49dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="1dp"
-        android:text="Set Time"
-        android:visibility="visible" />
-
-    <TextView
-        android:id="@+id/mDateDisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/buttonTime"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="13dp" />
-
-    <TextView
-        android:id="@+id/mTimeDisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/mDateDisplay"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="11dp" />
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="34dp"
+        android:text="Enter Event Location" />
 
     <EditText
-        android:id="@+id/EnterLocation"
-        android:layout_width="303dp"
-        android:layout_height="41dp"
-        android:layout_below="@+id/EventLocation"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
-        android:gravity="center_horizontal"
-        android:textColor="@android:color/black"
-        android:textSize="18sp" />
+        android:id="@+id/enterLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/EventLocation"
+        android:layout_alignBottom="@+id/EventLocation"
+        android:layout_alignParentEnd="true"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="254dp"
+        android:text="Enter Date:" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="308dp"
+        android:text="Enter Time:" />
+
+    <EditText
+        android:id="@+id/inputDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/date"
+        android:layout_alignBottom="@+id/date"
+        android:layout_alignStart="@+id/enterLocation"
+        android:ems="10"
+        android:inputType="date" />
+
+    <EditText
+        android:id="@+id/inputTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/time"
+        android:layout_alignBottom="@+id/time"
+        android:layout_alignParentEnd="true"
+        android:ems="10"
+        android:inputType="time" />
 
 
 </RelativeLayout>
