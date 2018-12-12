@@ -55,7 +55,7 @@ public class ProfileFragment extends Fragment {
     TextView houseuser , actualName, emailuser;
 
     //pulls from firebase
-    String house, birthday, rankUser;//String variables that will store Firestore data
+    String house;//String variables that will store Firestore data
     String email=currentUser.getEmail();//user's email already grabbed
     String name=currentUser.getDisplayName();//user's name already grabbed
     boolean admin;
@@ -109,8 +109,11 @@ public class ProfileFragment extends Fragment {
         emailuser = (TextView)  v.findViewById(R.id.pEmail);
 
         //sets to what firebase pulled
-        actualName.setText(name);
-        emailuser.setText(email);
+        if(name.length()!=0) {
+            actualName.setText(name);
+            emailuser.setText(email);
+        }
+
 
 
         requestBtn = v.findViewById(R.id.requestBtn);
@@ -121,7 +124,6 @@ public class ProfileFragment extends Fragment {
 
         // Slide Up
         actualName.startAnimation(slideup);
-
         emailuser.startAnimation(slideup);
         houseuser.startAnimation(slideup);
         /*
@@ -214,7 +216,12 @@ public class ProfileFragment extends Fragment {
                 if(house==null){//if house hasn't been defined yet, set to undefined
                     house="Alpha Rho Rho";
                 }
-                admin=doc.getBoolean("admin");
+                if(doc.getBoolean("admin")==null){
+                    admin =false;
+                }
+                else{
+                    admin = true;
+                }
                 if(admin){
 
                     requestBtn.setVisibility(View.VISIBLE);
