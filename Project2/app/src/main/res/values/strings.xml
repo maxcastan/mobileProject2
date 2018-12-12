@@ -11,6 +11,7 @@
     <string name="logoutMenuStr">Logout</string>
     <string name="updateMenuStr">Update Account</string>
     <string name="deleteMenuStr">Delete Account</string>
+    <string name="requestHouseStr">Request House</string>
     <string name="requestStr">REQUEST</string>
 
     <string-array

@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.firebase.ui.auth.AuthUI;
@@ -57,6 +58,7 @@ public class ProfileFragment extends Fragment {
     String house, birthday, rankUser;//String variables that will store Firestore data
     String email=currentUser.getEmail();//user's email already grabbed
     String name=currentUser.getDisplayName();//user's name already grabbed
+    boolean admin;
 
 
 
@@ -65,6 +67,9 @@ public class ProfileFragment extends Fragment {
     Button requestBtn;
 
     Animation slideup;
+
+    MenuItem requestHouseOption;
+
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -110,22 +115,7 @@ public class ProfileFragment extends Fragment {
 
         requestBtn = v.findViewById(R.id.requestBtn);
 
-
-        //listener for REQUEST button
-        requestBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RequestFragment requestFragment = new RequestFragment();
-                FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.user_frame, requestFragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-            }
-        });
-
-
-
-        slideup = AnimationUtils.loadAnimation(getActivity(),
+         slideup = AnimationUtils.loadAnimation(getActivity(),
                 R.anim.slide_up);
 
 
@@ -152,6 +142,9 @@ public class ProfileFragment extends Fragment {
         inflater.inflate(R.menu.profile_menu, menu);
 
         super.onCreateOptionsMenu(menu, inflater);
+
+        requestHouseOption = menu.findItem(R.id.request_option);
+
     }
 
     @Override
@@ -161,12 +154,12 @@ public class ProfileFragment extends Fragment {
                 logout();
                 return true;
 
-            case R.id.update_option:
-                updateAccount();
-                return true;
-
             case R.id.delete_option:
                 deleteAccount();
+                return true;
+
+            case R.id.request_option:
+                requestHouse();
                 return true;
 
             default:
@@ -181,20 +174,32 @@ public class ProfileFragment extends Fragment {
     //the code for this method should be changed
 
     private void logout() {
-        /*
         mAuth.signOut();
         Intent myIntent = new Intent(getActivity(), MainActivity.class);
         startActivity(myIntent);
         getActivity().finish();
-        */
     }
 
     private void updateAccount(){
         //code here
     }
 
+    private void requestHouse(){
+        //code here
+    }
+
     private void deleteAccount(){
         //code here
+        db.collection("Users").document(currentUser.getEmail())
+                .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Intent myintent=new Intent(getActivity(), MainActivity.class);
+                startActivity(myintent);
+                getActivity().finish();
+                currentUser.delete();
+            }
+        });
     }
 
     @Override
@@ -209,13 +214,23 @@ public class ProfileFragment extends Fragment {
                 if(house==null){//if house hasn't been defined yet, set to undefined
                     house="Alpha Rho Rho";
                 }
-                birthday=doc.getString("birthday");//
-                if(house==null){//if birthday hasn't been defined, set ""
-                    birthday="";
-                }
-                rankUser=doc.getString("rank");
-                if(rankUser==null){//if rank hasn't been defined yet
-                    rankUser="";
+                admin=doc.getBoolean("admin");
+                if(admin){
+
+                    requestBtn.setVisibility(View.VISIBLE);
+
+                    requestHouseOption.setVisible(false);
+
+                    requestBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            RequestFragment requestFragment = new RequestFragment();
+                            FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
+                            fragmentTransaction.replace(R.id.user_frame, requestFragment);
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
+                        }
+                    });
                 }
                 houseuser.setText(house);
             }

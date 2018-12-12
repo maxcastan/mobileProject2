@@ -112,9 +112,12 @@ public class HomeFragment extends Fragment {
                 DocumentSnapshot doc=task.getResult();
                 house=doc.getString("house");
                 if(house==null){
-                    house="Alpha Rho Rho";
+                    house="APP";
+                    getActivity().setTitle("Alpha Rho Rho");
                 }
-                getActivity().setTitle(house);
+                else{
+                    getActivity().setTitle(house);
+                }
                 query=messsageRef.document(house).collection("Messages")
                 .orderBy("timestamp", Query.Direction.DESCENDING);
                 setUpRecyclerView(v, getContext());
