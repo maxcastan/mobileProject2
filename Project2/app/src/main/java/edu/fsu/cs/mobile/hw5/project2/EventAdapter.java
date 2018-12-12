@@ -33,7 +33,7 @@ public class EventAdapter extends FirestoreRecyclerAdapter <Event, EventAdapter.
 
     @NonNull
     @Override
-    public EventHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public EventHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {//
         View v=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.event_card,
                 viewGroup, false);
         return new EventAdapter.EventHolder(v);    }
