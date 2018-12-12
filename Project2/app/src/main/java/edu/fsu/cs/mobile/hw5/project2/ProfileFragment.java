@@ -180,12 +180,12 @@ public class ProfileFragment extends Fragment {
         getActivity().finish();
     }
 
-    private void updateAccount(){
-        //code here
-    }
-
     private void requestHouse(){
-        //code here
+        ListHouseFragment listHouseFragment=new ListHouseFragment();
+        FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.user_frame, listHouseFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     private void deleteAccount(){
