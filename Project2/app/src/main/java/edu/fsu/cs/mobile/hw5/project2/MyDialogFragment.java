@@ -149,28 +149,51 @@ public class MyDialogFragment extends DialogFragment{
             }
 
             String dateTemp = date.getText().toString();
-            String day = dateTemp.substring(0, 1);
-            String month = dateTemp.substring(3, 4);
+            String day = "";
+            String month = "";
+            int startIndex = 0;
+
+
+            for(int i = 0; i < 3; i++)
+            {
+                if(dateTemp.charAt(i) != '/')
+                    day = day + dateTemp.charAt(i);
+                else
+                    startIndex = i;
+
+            }
+
+            for(int i = startIndex; i < startIndex + 3; i++)
+            {
+                if(dateTemp.charAt(i) != '/')
+                    month = month + dateTemp.charAt(i);
+            }
 
             Pattern pattern1 = Pattern.compile("\\d{2}/\\d{2}/\\d{2}");
-            Pattern pattern2 = Pattern.compile("\\d{2}/\\d{2}/\\d{4}");
-            Pattern pattern5 = Pattern.compile("\\d{1}/\\d{2}/\\d{4}");
-            Pattern pattern6 = Pattern.compile("\\d{2}/\\d{2}/\\d{2}");
+            Pattern pattern2 = Pattern.compile("\\d/\\d{2}/\\d{2}");
+            Pattern pattern3 = Pattern.compile("\\d{2}/\\d/\\d{2}");
+            Pattern pattern4 = Pattern.compile("\\d/\\d/\\d{2}");
+            Pattern pattern5 = Pattern.compile("\\d{2}/\\d{2}/\\d{4}");
+            Pattern pattern6 = Pattern.compile("\\d/\\d{2}/\\d{4}");
+            Pattern pattern7 = Pattern.compile("\\d{2}/\\d/\\d{4}");
+            Pattern pattern8 = Pattern.compile("\\d/\\d/\\d{4}");
 
-        Matcher matcher1 = pattern1.matcher(dateTemp);
+            Matcher matcher1 = pattern1.matcher(dateTemp);
             Matcher matcher2 = pattern2.matcher(dateTemp);
+            Matcher matcher3 = pattern3.matcher(dateTemp);
+            Matcher matcher4 = pattern4.matcher(dateTemp);
             Matcher matcher5 = pattern5.matcher(dateTemp);
+            Matcher matcher6 = pattern6.matcher(dateTemp);
+            Matcher matcher7 = pattern7.matcher(dateTemp);
+            Matcher matcher8 = pattern8.matcher(dateTemp);
             boolean matchDate = false;
 
-            if(matcher1.matches())
-                matchDate = true;
-            if(matcher2.matches())
-                matchDate = true;
-            if(matcher5.matches())
+            if(matcher1.matches() || matcher2.matches() || matcher3.matches() || matcher4.matches() ||
+                    matcher5.matches() || matcher6.matches() || matcher7.matches() || matcher8.matches())
                 matchDate = true;
 
 
-        if (!matchDate || Integer.parseInt(day) > 31 || Integer.parseInt(day) < 1 ||
+            if (!matchDate || Integer.parseInt(day) > 31 || Integer.parseInt(day) < 1 ||
                     Integer.parseInt(month) > 12 || Integer.parseInt(month) < 1) {
                 date.setError("Please enter a valid event date dd/mm/yy or dd/mm/yyyy");
                 return false;
@@ -178,20 +201,40 @@ public class MyDialogFragment extends DialogFragment{
 
 
             String timeTemp = time.getText().toString();
-            Pattern pattern3 = Pattern.compile("\\d{2}:\\d{2}");
-            Pattern pattern4 = Pattern.compile("\\d:\\d{2}");
+            Pattern pattern9 = Pattern.compile("\\d{2}:\\d{2}");
+            Pattern pattern10 = Pattern.compile("\\d:\\d{2}");
+            Pattern pattern11 = Pattern.compile("\\d{2}:\\d");
+            Pattern pattern12 = Pattern.compile("\\d:\\d");
 
-        boolean matchTime = false;
-        Matcher matcher3 = pattern3.matcher(timeTemp);
-        Matcher matcher4 = pattern4.matcher(timeTemp);
-        String hours = timeTemp.substring(0, 1);
-        String minutes = timeTemp.substring(3, 4);
 
-        if(matcher3.matches())
-            matchTime = true;
-        if(matcher4.matches())
-            matchTime = true;
 
+            boolean matchTime = false;
+            Matcher matcher9 = pattern9.matcher(timeTemp);
+            Matcher matcher10 = pattern10.matcher(timeTemp);
+            Matcher matcher11 = pattern11.matcher(timeTemp);
+            Matcher matcher12 = pattern12.matcher(timeTemp);
+
+
+            String hours = "";
+            String minutes = "";
+
+            for(int i = 0; i < 3; i++)
+            {
+                if(timeTemp.charAt(i) != ':')
+                    hours = hours + timeTemp.charAt(i);
+                else
+                    startIndex = i;
+
+            }
+
+            for(int i = startIndex; i < startIndex + 3; i++)
+            {
+                if(timeTemp.charAt(i) != ':')
+                    minutes = minutes + timeTemp.charAt(i);
+            }
+
+            if(matcher9.matches() || matcher10.matches() || matcher11.matches() || matcher12.matches())
+                matchTime = true;
 
 
              if (!matchTime || Integer.parseInt(hours) > 24 || Integer.parseInt(hours) < 1 ||
@@ -200,7 +243,7 @@ public class MyDialogFragment extends DialogFragment{
               return false;
              }
 
-        return true;
+            return true;
     }
 
     private void sendResult(int REQUEST_CODE) throws ParseException {
