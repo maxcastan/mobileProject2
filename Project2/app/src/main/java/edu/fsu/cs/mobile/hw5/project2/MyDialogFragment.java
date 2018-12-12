@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -85,7 +86,11 @@ public class MyDialogFragment extends DialogFragment{
                         date.getText().toString(), time.getText().toString()))
                 {
                     dismiss();
-                    sendResult(SocialFragment.REQUEST_CODE);
+                    try {
+                        sendResult(SocialFragment.REQUEST_CODE);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 }
 
 
@@ -161,14 +166,14 @@ public class MyDialogFragment extends DialogFragment{
             String minutes = timeTemp.substring(3, 4);
              if (!matcher3.matches() || Integer.parseInt(hours) > 24 || Integer.parseInt(hours) < 1 ||
                      Integer.parseInt(minutes) > 59 || Integer.parseInt(hours) < 1) {
-              date.setError("Please enter a valid event time hh:mm");
+              time.setError("Please enter a valid event time hh:mm");
               return false;
              }
 
         return true;
     }
 
-    private void sendResult(int REQUEST_CODE) {
+    private void sendResult(int REQUEST_CODE) throws ParseException {
         Intent intent = new Intent();
         Bundle b = new Bundle();
         b.putString(EVENT, EventName.getText().toString());
@@ -176,7 +181,7 @@ public class MyDialogFragment extends DialogFragment{
         b.putString(DATE, date.getText().toString());
         b.putString(TIME, time.getText().toString());
 
-        intent.putExtra("bundle", b);
+        intent.putExtras(b);
         SocialFragment.onFragmentResult(getTargetRequestCode(), REQUEST_CODE, intent);
     }
 

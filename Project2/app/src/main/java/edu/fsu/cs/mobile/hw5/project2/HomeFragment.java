@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -32,6 +33,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.type.Date;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -121,8 +123,8 @@ public class HomeFragment extends Fragment {
                 else{
                     getActivity().setTitle(house+" Stream");
                 }
-                query=messsageRef.document(house).collection("Messages");
-              //  .orderBy("timestamp", Query.Direction.DESCENDING);
+                query=messsageRef.document(house).collection("Messages")
+                .orderBy("timestamp", Query.Direction.DESCENDING);
                 setUpRecyclerView(v, getContext());
                 adapter.startListening();
             }
@@ -140,6 +142,7 @@ public class HomeFragment extends Fragment {
             Map<String, Object> message=new HashMap<>();
             message.put("message", bl.getString("message"));
             message.put("name", currentUser.getDisplayName());
+            message.put("timestamp", new java.util.Date());
             db.collection("House").document(house)
                     .collection("Messages").document().set(message);
 

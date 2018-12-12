@@ -13,6 +13,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,7 +22,14 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -30,7 +39,7 @@ import java.util.Map;
 public class SocialFragment extends Fragment{
 
     private FirebaseAuth mAuth=FirebaseAuth.getInstance();
-    private FirebaseFirestore db=FirebaseFirestore.getInstance();
+    private static FirebaseFirestore db=FirebaseFirestore.getInstance();
     private Map<String, Object> event=new HashMap<>();
     FirebaseUser currentUser=FirebaseAuth.getInstance().getCurrentUser();
     private CollectionReference eventRef=db.collection("Events");
@@ -95,7 +104,7 @@ public class SocialFragment extends Fragment{
     public void onStart() {
         super.onStart();
         query=eventRef
-                .orderBy("timestamp", Query.Direction.ASCENDING);
+                .orderBy("timestamp", Query.Direction.DESCENDING);
 
         setUpRecyclerView(v, getContext());
         adapter.startListening();
@@ -109,7 +118,7 @@ public class SocialFragment extends Fragment{
         adapter.stopListening();
     }
 
-    public static void onFragmentResult(int requestCode, int resultCode, Intent data) {
+    public static void onFragmentResult(int requestCode, int resultCode, Intent data) throws ParseException {
         // Make sure fragment codes match up
         if (requestCode == MyDialogFragment.REQUEST_CODE) {
 
@@ -118,10 +127,14 @@ public class SocialFragment extends Fragment{
             String place = b.getString(MyDialogFragment.PLACE);
             String date = b.getString(MyDialogFragment.DATE);
             String time = b.getString(MyDialogFragment.TIME);
-
-            onNewEvent(name, place, date, time);
-
-
+            DateFormat format=new SimpleDateFormat("dd/MM/yy hh:mm", Locale.US);
+            Date eventDate=format.parse(date+" "+time);
+            Map<String, Object> event=new HashMap<>();
+            event.put("address", place);
+            event.put("title", name);
+            event.put("timestamp", eventDate);
+            event.put("Invited", Arrays.asList("APP"));
+            db.collection("Events").document().set(event);
         }
 
     }
