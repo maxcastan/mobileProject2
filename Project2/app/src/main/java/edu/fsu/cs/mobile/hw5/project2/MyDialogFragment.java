@@ -49,11 +49,8 @@ public class MyDialogFragment extends DialogFragment{
     private EditText date;
     private EditText time;
     private Button submit;
-<<<<<<< Updated upstream
     private String house;
-=======
     //private int REQUEST_CODE;
->>>>>>> Stashed changes
 
     Spinner housespinner;
 
@@ -93,17 +90,18 @@ public class MyDialogFragment extends DialogFragment{
                         date.getText().toString(), time.getText().toString()))
                 {
                     dismiss();
-<<<<<<< Updated upstream
                     try {
                         sendResult(SocialFragment.REQUEST_CODE);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-=======
-                    sendResult(SocialFragment.REQUEST_CODE);
+                    try {
+                        sendResult(SocialFragment.REQUEST_CODE);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
 
 
->>>>>>> Stashed changes
                 }
 
 
