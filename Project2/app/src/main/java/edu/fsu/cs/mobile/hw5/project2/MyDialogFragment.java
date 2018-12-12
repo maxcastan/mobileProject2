@@ -43,11 +43,13 @@ public class MyDialogFragment extends DialogFragment{
     public final static String PLACE = "place";
     public final static String DATE = "date";
     public final static String TIME = "time";
+    public final static String HOUSE = "house";
     private EditText EventName;
     private EditText EventLocation;
     private EditText date;
     private EditText time;
     private Button submit;
+    private String house;
 
     Spinner housespinner;
 
@@ -199,6 +201,7 @@ public class MyDialogFragment extends DialogFragment{
         b.putString(PLACE, EventLocation.getText().toString());
         b.putString(DATE, date.getText().toString());
         b.putString(TIME, time.getText().toString());
+        b.putString(HOUSE, housespinner.getSelectedItem().toString());
 
         intent.putExtras(b);
         SocialFragment.onFragmentResult(getTargetRequestCode(), REQUEST_CODE, intent);

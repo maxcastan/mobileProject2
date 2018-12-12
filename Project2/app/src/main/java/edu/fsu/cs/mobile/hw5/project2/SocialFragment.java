@@ -49,6 +49,8 @@ public class SocialFragment extends Fragment{
     private EventAdapter adapter;
     private View v;
     private Query query;
+    private static String house;
+
     public final static int REQUEST_CODE = 0;
 
 
@@ -111,7 +113,6 @@ public class SocialFragment extends Fragment{
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 DocumentSnapshot doc=task.getResult();
-                String house;
                 house=doc.getString("house");
                 if(house==null){
                     house="Alpha Rho Rho";
@@ -143,13 +144,14 @@ public class SocialFragment extends Fragment{
             String place = b.getString(MyDialogFragment.PLACE);
             String date = b.getString(MyDialogFragment.DATE);
             String time = b.getString(MyDialogFragment.TIME);
+            String inviteHouse=b.getString(MyDialogFragment.HOUSE);
             DateFormat format=new SimpleDateFormat("dd/MM/yy hh:mm", Locale.US);
             Date eventDate=format.parse(date+" "+time);
             Map<String, Object> event=new HashMap<>();
             event.put("address", place);
             event.put("title", name);
             event.put("timestamp", eventDate);
-            event.put("Invited", Arrays.asList("APP"));
+            event.put("Invited", Arrays.asList(house, inviteHouse));
             db.collection("Events").document().set(event);
         }
 
