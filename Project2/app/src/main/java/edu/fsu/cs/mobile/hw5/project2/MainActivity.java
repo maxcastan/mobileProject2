@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }//end of onActivityResult
-/*
+
     @Override
     public void onStart(){
         super.onStart();
@@ -98,5 +98,5 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
     }
-*/
+
 }//end of Main

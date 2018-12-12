@@ -59,6 +59,7 @@ public class HouseMessageComments extends Fragment {
             commentID=bundle.getString("commentID");
             setUpRecyclerView(v, getContext());
         }
+        getActivity().setTitle("Comments");
         FloatingActionButton add=v.findViewById(R.id.floatingActionButton_house_message_comments);
         add.setOnClickListener(new View.OnClickListener() {
             @Override

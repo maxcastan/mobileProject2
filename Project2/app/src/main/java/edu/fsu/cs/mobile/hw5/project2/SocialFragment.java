@@ -50,6 +50,8 @@ public class SocialFragment extends Fragment{
                              Bundle savedInstanceState) {
         v=inflater.inflate(R.layout.fragment_social, container, false);
 
+        getActivity().setTitle("Events");
+
         FloatingActionButton fab = v.findViewById(R.id.add);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

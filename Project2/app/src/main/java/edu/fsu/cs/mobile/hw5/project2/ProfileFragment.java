@@ -51,11 +51,14 @@ public class ProfileFragment extends Fragment {
     private Map<String, Object> user=new HashMap<>();
     private FirebaseUser currentUser=FirebaseAuth.getInstance().getCurrentUser();
 
-    EditText userid, emailuser, rank;
-    TextView houseuser , bday, actualName;
+    TextView houseuser , actualName, emailuser;
+
+    //pulls from firebase
     String house, birthday, rankUser;//String variables that will store Firestore data
     String email=currentUser.getEmail();//user's email already grabbed
     String name=currentUser.getDisplayName();//user's name already grabbed
+
+
 
     ImageView image;
 
@@ -73,19 +76,16 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-
         View v=inflater.inflate(R.layout.fragment_profile, container, false);
 
-
+        getActivity().setTitle("Profile");
 
         //this lets the fragment know it will have an options menu
         setHasOptionsMenu(true);
         final FirebaseUser currentUser=FirebaseAuth.getInstance().getCurrentUser();
 
 
-
         image = (ImageView) v.findViewById(R.id.pImg);
-
 
 
         //male
@@ -94,25 +94,19 @@ public class ProfileFragment extends Fragment {
 
 
 
-        //female
+        //female for scaling to identify gender
         //image.setImageResource(R.mipmap.w2);
 
 
-
-        //edit text because these may change and are editable
-        userid = (EditText) v.findViewById(R.id.pUserId);
-        emailuser = (EditText)  v.findViewById(R.id.pEmail);
-        rank = (EditText)  v.findViewById(R.id.pRank);
-
-
-
         //text view bc these do not change
-        bday = (TextView)  v.findViewById(R.id.pBday);
         houseuser= (TextView)  v.findViewById(R.id.pHouse);
         actualName = (TextView)  v.findViewById(R.id.pName);
+        emailuser = (TextView)  v.findViewById(R.id.pEmail);
 
+        //sets to what firebase pulled
+        actualName.setText(name);
+        emailuser.setText(email);
 
-        actualName.setText("lala");
 
         requestBtn = v.findViewById(R.id.requestBtn);
 
@@ -137,10 +131,8 @@ public class ProfileFragment extends Fragment {
 
         // Slide Up
         actualName.startAnimation(slideup);
-        rank.startAnimation(slideup);
-        userid.startAnimation(slideup);
+
         emailuser.startAnimation(slideup);
-        bday.startAnimation(slideup);
         houseuser.startAnimation(slideup);
         /*
         btnSlideUp.setOnClickListener(new View.OnClickListener() {
@@ -215,7 +207,7 @@ public class ProfileFragment extends Fragment {
                 DocumentSnapshot doc=task.getResult();//when complete grabs the result
                 house=doc.getString("house");//gets house
                 if(house==null){//if house hasn't been defined yet, set to undefined
-                    house="Undefined";
+                    house="Alpha Rho Rho";
                 }
                 birthday=doc.getString("birthday");//
                 if(house==null){//if birthday hasn't been defined, set ""
@@ -225,8 +217,9 @@ public class ProfileFragment extends Fragment {
                 if(rankUser==null){//if rank hasn't been defined yet
                     rankUser="";
                 }
-
+                houseuser.setText(house);
             }
         });
+
     }
 }

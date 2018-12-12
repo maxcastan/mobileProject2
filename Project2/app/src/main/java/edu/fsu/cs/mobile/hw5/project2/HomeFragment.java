@@ -64,6 +64,7 @@ public class HomeFragment extends Fragment {
 
         v=inflater.inflate(R.layout.fragment_home, container, false);
         FloatingActionButton add=v.findViewById(R.id.floatingActionButton_home_fragment);
+
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,8 +112,9 @@ public class HomeFragment extends Fragment {
                 DocumentSnapshot doc=task.getResult();
                 house=doc.getString("house");
                 if(house==null){
-                    house="APP";
+                    house="Alpha Rho Rho";
                 }
+                getActivity().setTitle(house);
                 query=messsageRef.document(house).collection("Messages")
                 .orderBy("timestamp", Query.Direction.DESCENDING);
                 setUpRecyclerView(v, getContext());
