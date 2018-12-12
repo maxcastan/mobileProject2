@@ -38,7 +38,7 @@ public class EventAdapter extends FirestoreRecyclerAdapter <Event, EventAdapter.
                 viewGroup, false);
         return new EventAdapter.EventHolder(v);    }
 
-    class EventHolder extends RecyclerView.ViewHolder {
+    class EventHolder extends RecyclerView.ViewHolder {//holder function for the event card layout
         TextView title;//title
         TextView address; //address
         TextView timestamp; //timestamp
@@ -65,7 +65,7 @@ public class EventAdapter extends FirestoreRecyclerAdapter <Event, EventAdapter.
     public interface OnItemClickListener{
         void onItemClick(DocumentSnapshot documentSnapshot, int position);
     }
-    public void setOnItemClickListener(MessageAdapter.OnItemClickListener listener){
+    public void setOnItemClickListener(MessageAdapter.OnItemClickListener listener){//sets a list click listener for an adapter
         this.listener=listener;
     }
 }

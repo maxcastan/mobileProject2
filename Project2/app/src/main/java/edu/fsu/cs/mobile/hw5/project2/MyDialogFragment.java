@@ -143,28 +143,47 @@ public class MyDialogFragment extends DialogFragment{
 
             Pattern pattern1 = Pattern.compile("\\d{2}/\\d{2}/\\d{2}");
             Pattern pattern2 = Pattern.compile("\\d{2}/\\d{2}/\\d{4}");
-            Matcher matcher1 = pattern1.matcher(dateTemp);
+            Pattern pattern5 = Pattern.compile("\\d{1}/\\d{2}/\\d{4}");
+            Pattern pattern6 = Pattern.compile("\\d{2}/\\d{2}/\\d{2}");
+
+        Matcher matcher1 = pattern1.matcher(dateTemp);
             Matcher matcher2 = pattern2.matcher(dateTemp);
-            boolean match = false;
+            Matcher matcher5 = pattern5.matcher(dateTemp);
+            boolean matchDate = false;
 
             if(matcher1.matches())
-                match = true;
+                matchDate = true;
             if(matcher2.matches())
-                match = true;
+                matchDate = true;
+            if(matcher5.matches())
+                matchDate = true;
 
 
-        if (!match || Integer.parseInt(day) > 31 || Integer.parseInt(day) < 1 ||
+        if (!matchDate || Integer.parseInt(day) > 31 || Integer.parseInt(day) < 1 ||
                     Integer.parseInt(month) > 12 || Integer.parseInt(month) < 1) {
                 date.setError("Please enter a valid event date dd/mm/yy or dd/mm/yyyy");
                 return false;
             }
 
+
             String timeTemp = time.getText().toString();
             Pattern pattern3 = Pattern.compile("\\d{2}:\\d{2}");
-            Matcher matcher3 = pattern3.matcher(timeTemp);
-            String hours = timeTemp.substring(0, 1);
-            String minutes = timeTemp.substring(3, 4);
-             if (!matcher3.matches() || Integer.parseInt(hours) > 24 || Integer.parseInt(hours) < 1 ||
+            Pattern pattern4 = Pattern.compile("\\d:\\d{2}");
+
+        boolean matchTime = false;
+        Matcher matcher3 = pattern3.matcher(timeTemp);
+        Matcher matcher4 = pattern4.matcher(timeTemp);
+        String hours = timeTemp.substring(0, 1);
+        String minutes = timeTemp.substring(3, 4);
+
+        if(matcher3.matches())
+            matchTime = true;
+        if(matcher4.matches())
+            matchTime = true;
+
+
+
+             if (!matchTime || Integer.parseInt(hours) > 24 || Integer.parseInt(hours) < 1 ||
                      Integer.parseInt(minutes) > 59 || Integer.parseInt(hours) < 1) {
               time.setError("Please enter a valid event time hh:mm");
               return false;
