@@ -44,14 +44,15 @@ public class HomeFragment extends Fragment {
 
 
     private FirebaseAuth mAuth=FirebaseAuth.getInstance();
-    private FirebaseFirestore db=FirebaseFirestore.getInstance();
-    private Map<String, Object> message=new HashMap<>();
-    FirebaseUser currentUser=FirebaseAuth.getInstance().getCurrentUser();
+    private static FirebaseFirestore db=FirebaseFirestore.getInstance();
+  //  private Map<String, Object> message=new HashMap<>();
+    private static FirebaseUser currentUser=FirebaseAuth.getInstance().getCurrentUser();
     private CollectionReference messsageRef=db.collection("House");
     private MessageAdapter adapter;
     private View v;
     private Query query;
-    private String house;
+    private static String house;
+    public final static int REQUEST_CODE = 1;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -68,7 +69,9 @@ public class HomeFragment extends Fragment {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                MessageDialogFragment mdf = new MessageDialogFragment();
+                mdf.setTargetFragment(getFragmentManager().getPrimaryNavigationFragment(), REQUEST_CODE);
+                mdf.show(getFragmentManager(), MessageDialogFragment.TAG);
             }
         });
         return v;
@@ -118,12 +121,30 @@ public class HomeFragment extends Fragment {
                 else{
                     getActivity().setTitle(house+" Stream");
                 }
-                query=messsageRef.document(house).collection("Messages")
-                .orderBy("timestamp", Query.Direction.DESCENDING);
+                query=messsageRef.document(house).collection("Messages");
+              //  .orderBy("timestamp", Query.Direction.DESCENDING);
                 setUpRecyclerView(v, getContext());
                 adapter.startListening();
             }
         });
+
+    }
+
+    public static void onFragmentResult(int requestCode, Intent data) {
+        // Make sure fragment codes match up
+        if (requestCode == MessageDialogFragment.REQUEST_CODE) {
+            String msg= null;
+            Bundle bl = data.getExtras();
+            //if(bl != null)
+             //   msg = (String) bl.getSerializable(MessageDialogFragment.MESSAGE);
+            Map<String, Object> message=new HashMap<>();
+            message.put("message", bl.getString("message"));
+            message.put("name", currentUser.getDisplayName());
+            db.collection("House").document(house)
+                    .collection("Messages").document().set(message);
+
+
+        }
 
     }
 

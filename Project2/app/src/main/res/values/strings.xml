@@ -14,8 +14,7 @@
     <string name="requestHouseStr">Request House</string>
     <string name="requestStr">REQUEST</string>
 
-    <string-array
-        name="housesarray">
+    <string-array name="housesarray">
         <item>Alpha Rho Rho</item>
         <item>Delta Tau Epsilon</item>
         <item>Rho Kappa Gamma</item>

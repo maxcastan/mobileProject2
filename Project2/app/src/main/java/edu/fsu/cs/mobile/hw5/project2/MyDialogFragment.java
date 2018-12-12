@@ -176,7 +176,7 @@ public class MyDialogFragment extends DialogFragment{
         b.putString(DATE, date.getText().toString());
         b.putString(TIME, time.getText().toString());
 
-        intent.putExtra("bunlde", b);
+        intent.putExtra("bundle", b);
         SocialFragment.onFragmentResult(getTargetRequestCode(), REQUEST_CODE, intent);
     }
 
