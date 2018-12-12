@@ -219,8 +219,8 @@ public class ProfileFragment extends Fragment {
                 if(doc.getBoolean("admin")==null){
                     admin =false;
                 }
-                else{
-                    admin = true;
+                else {
+                    admin = doc.getBoolean("admin");
                 }
                 if(admin){
 

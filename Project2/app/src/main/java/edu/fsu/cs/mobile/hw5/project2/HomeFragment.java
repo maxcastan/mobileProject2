@@ -117,7 +117,7 @@ public class HomeFragment extends Fragment {
                 DocumentSnapshot doc=task.getResult();
                 house=doc.getString("house");
                 if(house==null){
-                    house="APP";
+                    house="Alpha Rho Rho";
                     getActivity().setTitle("Alpha Rho Rho Stream");
                 }
                 else{

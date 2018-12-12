@@ -70,7 +70,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="203dp"
         android:gravity="center_horizontal"
-        android:text="TextView"
+        android:text="Name"
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:textStyle="bold" />
