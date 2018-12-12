@@ -49,14 +49,18 @@ public class MyDialogFragment extends DialogFragment{
     private EditText date;
     private EditText time;
     private Button submit;
+<<<<<<< Updated upstream
     private String house;
+=======
+    //private int REQUEST_CODE;
+>>>>>>> Stashed changes
 
     Spinner housespinner;
-
 
     public MyDialogFragment() {
         // Required empty public constructor
     }
+
 
 
     @NonNull
@@ -70,6 +74,7 @@ public class MyDialogFragment extends DialogFragment{
         time = rootView.findViewById(R.id.inputTime);
         date = rootView.findViewById(R.id.inputDate);
         submit = rootView.findViewById(R.id.submit);
+        //REQUEST_CODE = getParentFragment().REQUEST_CODE;
         //spinner
         housespinner = rootView.findViewById(R.id.HousesList);
         String[] housesInArray = getResources().getStringArray(R.array.housesarray);
@@ -88,11 +93,17 @@ public class MyDialogFragment extends DialogFragment{
                         date.getText().toString(), time.getText().toString()))
                 {
                     dismiss();
+<<<<<<< Updated upstream
                     try {
                         sendResult(SocialFragment.REQUEST_CODE);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
+=======
+                    sendResult(SocialFragment.REQUEST_CODE);
+
+
+>>>>>>> Stashed changes
                 }
 
 

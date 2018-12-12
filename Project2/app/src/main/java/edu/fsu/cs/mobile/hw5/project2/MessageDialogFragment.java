@@ -39,14 +39,23 @@ public class MessageDialogFragment extends DialogFragment {
         View rootView = inflater.inflate(R.layout.fragment_message_dialog, null);
         msg = rootView.findViewById(R.id.msg);
         submit = rootView.findViewById(R.id.msg_submit);
+        final int code = getTargetRequestCode();
+
         builder.setView(rootView);
         builder.setTitle("Enter a message:");
-
         submit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
 
-                sendResult(HomeFragment.REQUEST_CODE);
+
+                sendResult(code);
+
+               /* if(code == HomeFragment.REQUEST_CODE)
+                    sendResult(HomeFragment.REQUEST_CODE);
+                if (code == HouseMessageComments.REQUEST_CODE)
+                    sendResult(HouseMessageComments.REQUEST_CODE);
+                if (code == EventMessageFragment.REQUEST_CODE)
+                    sendResult(EventMessageFragment.REQUEST_CODE);*/
                 dismiss();
 
 
@@ -63,7 +72,13 @@ public class MessageDialogFragment extends DialogFragment {
         b.putString(MESSAGE, msg.getText().toString());
 
         intent.putExtras(b);
-        HomeFragment.onFragmentResult(getTargetRequestCode(), intent);
+        if(REQUEST_CODE == HomeFragment.REQUEST_CODE)
+            HomeFragment.onFragmentResult(getTargetRequestCode(), intent);
+        if (REQUEST_CODE == HouseMessageComments.REQUEST_CODE)
+            HouseMessageComments.onFragmentResult(getTargetRequestCode(), intent);
+        if (REQUEST_CODE == EventMessageFragment.REQUEST_CODE)
+            EventMessageFragment.onFragmentResult(getTargetRequestCode(), intent);
+
     }
 
 

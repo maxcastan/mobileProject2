@@ -2,6 +2,7 @@ package edu.fsu.cs.mobile.hw5.project2;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -25,6 +26,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,15 +37,19 @@ import java.util.Map;
 public class HouseMessageComments extends Fragment {
 
     private FirebaseAuth mAuth=FirebaseAuth.getInstance();
-    private FirebaseFirestore db=FirebaseFirestore.getInstance();
+    private static FirebaseFirestore db=FirebaseFirestore.getInstance();
     private Map<String, Object> message=new HashMap<>();
-    FirebaseUser currentUser=FirebaseAuth.getInstance().getCurrentUser();
+    private static FirebaseUser currentUser=FirebaseAuth.getInstance().getCurrentUser();
     private CollectionReference messsageRef=db.collection("House");
     private MessageAdapter adapter;
     View v;
     Query query;
-    String house;
-    String commentID;
+    private static String house;
+    private static String commentID;
+    public final static int REQUEST_CODE = 2;
+
+
+
     public HouseMessageComments() {
         // Required empty public constructor
     }
@@ -64,7 +70,9 @@ public class HouseMessageComments extends Fragment {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                MessageDialogFragment mdf = new MessageDialogFragment();
+                mdf.setTargetFragment(getFragmentManager().getPrimaryNavigationFragment(), REQUEST_CODE);
+                mdf.show(getFragmentManager(), MessageDialogFragment.TAG);
             }
         });
         return v;
@@ -98,5 +106,20 @@ public class HouseMessageComments extends Fragment {
         adapter.stopListening();
     }
 
+    public static void onFragmentResult(int requestCode, Intent data) {
+        // Make sure fragment codes match up
+        if (requestCode == HouseMessageComments.REQUEST_CODE) {
+
+            Bundle b = data.getExtras();
+            String text = b.getString(MessageDialogFragment.MESSAGE);
+
+            Map<String, Object> message=new HashMap<>();
+            message.put("message", text);
+            message.put("name", currentUser.getDisplayName());
+            message.put("timestamp", new Date());
+            db.collection("House").document(house)
+                    .collection("Messages").document(commentID).collection("Comments").document().set(message);
+        }
+    }
 
 }

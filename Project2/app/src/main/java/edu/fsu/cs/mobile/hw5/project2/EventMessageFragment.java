@@ -2,6 +2,7 @@ package edu.fsu.cs.mobile.hw5.project2;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,14 +31,18 @@ import java.util.Map;
 public class EventMessageFragment extends Fragment {
 
     private FirebaseAuth mAuth=FirebaseAuth.getInstance();
-    private FirebaseFirestore db=FirebaseFirestore.getInstance();
+    private static FirebaseFirestore db=FirebaseFirestore.getInstance();
     private Map<String, Object> message=new HashMap<>();
-    FirebaseUser currentUser=FirebaseAuth.getInstance().getCurrentUser();
+    private static FirebaseUser currentUser=FirebaseAuth.getInstance().getCurrentUser();
     private CollectionReference messsageRef=db.collection("Events");
     private MessageAdapter adapter;
     View v;
+    private static String eventID;
     Query query;
-    String eventID;
+    private static String events;
+    private static String commentID;
+    public final static int REQUEST_CODE = 3;
+
 
     public EventMessageFragment() {
         // Required empty public constructor
@@ -57,7 +63,9 @@ public class EventMessageFragment extends Fragment {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                MessageDialogFragment mdf = new MessageDialogFragment();
+                mdf.setTargetFragment(getFragmentManager().getPrimaryNavigationFragment(), REQUEST_CODE);
+                mdf.show(getFragmentManager(), MessageDialogFragment.TAG);
             }
         });
         return v;
@@ -87,6 +95,23 @@ public class EventMessageFragment extends Fragment {
     public void onStop() {
         super.onStop();
         adapter.stopListening();
+    }
+
+
+    public static void onFragmentResult(int requestCode, Intent data) {
+        // Make sure fragment codes match up
+        if (requestCode == EventMessageFragment.REQUEST_CODE) {
+
+            Bundle b = data.getExtras();
+            String text = b.getString(MessageDialogFragment.MESSAGE);
+
+            Map<String, Object> message=new HashMap<>();
+            message.put("message", text);
+            message.put("name", currentUser.getDisplayName());
+            message.put("timestamp", new Date());
+            db.collection("Events").document(eventID)
+                    .collection("Messages").document().set(message);
+        }
     }
 
 }
