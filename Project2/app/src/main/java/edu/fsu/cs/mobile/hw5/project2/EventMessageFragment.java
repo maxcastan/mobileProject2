@@ -52,6 +52,7 @@ public class EventMessageFragment extends Fragment {
             eventID=bundle.getString("eventID");
             setUpRecyclerView(v, getContext());
         }
+        getActivity().setTitle("Event Comments");
         FloatingActionButton add=v.findViewById(R.id.floatingActionButton_event_messages);
         add.setOnClickListener(new View.OnClickListener() {
             @Override

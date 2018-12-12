@@ -113,10 +113,10 @@ public class HomeFragment extends Fragment {
                 house=doc.getString("house");
                 if(house==null){
                     house="APP";
-                    getActivity().setTitle("Alpha Rho Rho");
+                    getActivity().setTitle("Alpha Rho Rho Stream");
                 }
                 else{
-                    getActivity().setTitle(house);
+                    getActivity().setTitle(house+" Stream");
                 }
                 query=messsageRef.document(house).collection("Messages")
                 .orderBy("timestamp", Query.Direction.DESCENDING);
