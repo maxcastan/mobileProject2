@@ -117,8 +117,8 @@ public class SocialFragment extends Fragment{
                 if(house==null){
                     house="Alpha Rho Rho";
                 }
-                query=eventRef.orderBy("timestamp", Query.Direction.DESCENDING).whereArrayContains("Invited", house);
-                    //
+                query=eventRef.whereArrayContains("Invited", house);
+                    //    .orderBy("timestamp", Query.Direction.DESCENDING);
 
                 setUpRecyclerView(v, getContext());
                 adapter.startListening();
