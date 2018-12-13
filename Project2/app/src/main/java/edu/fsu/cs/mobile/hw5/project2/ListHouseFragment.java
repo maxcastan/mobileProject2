@@ -42,7 +42,7 @@ public class ListHouseFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,//creates view of list houses, calls recycler view
                              Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_list_house, container, false);
         getActivity().setTitle("Request a House");
@@ -50,7 +50,7 @@ public class ListHouseFragment extends Fragment {
         return v;
     }
 
-    private void setUpRecyclerView(View v, final Context c) {
+    private void setUpRecyclerView(View v, final Context c) {//queries and returns a list of all houses the user can request to join
         Query query=houseRef;
         FirestoreRecyclerOptions<House> options=new FirestoreRecyclerOptions.Builder<House>()
                 .setQuery(query, House.class)
@@ -63,7 +63,7 @@ public class ListHouseFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(new UserAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+            public void onItemClick(DocumentSnapshot documentSnapshot, int position) {//on click, the user is added to the request array for that house in firestore
                 Map<String, Object> user=new HashMap<>();
                 user.put("userEmail", currentUser.getEmail());
                 user.put("userName", currentUser.getDisplayName());
@@ -75,14 +75,14 @@ public class ListHouseFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
+    public void onStart() {//adapter starts listening
         super.onStart();
         adapter.startListening();
 
     }
 
     @Override
-    public void onStop() {
+    public void onStop() {//adapter stops listening
         super.onStop();
         adapter.stopListening();
     }

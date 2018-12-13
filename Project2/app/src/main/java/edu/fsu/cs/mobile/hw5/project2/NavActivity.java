@@ -27,7 +27,7 @@ public class NavActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {//creates activity that has bottom tab navigation to navigate between tabs
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav);
 

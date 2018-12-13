@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     Animation homeAnimation;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {//creates the activity view, shows the home animation and starts Firestore Auth UI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {//Firestore Auth UI Function to sign/log in users
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == RC_SIGN_IN) {

@@ -50,7 +50,7 @@ public class EventMessageFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,//creates view to display all messages posted within an event
                              Bundle savedInstanceState) {
         v=inflater.inflate(R.layout.fragment_event_message, container, false);
         Bundle bundle=this.getArguments();
@@ -70,7 +70,7 @@ public class EventMessageFragment extends Fragment {
         });
         return v;
     }
-    private void setUpRecyclerView(View v, final Context c) {
+    private void setUpRecyclerView(View v, final Context c) {//sets up recylcer view to sort messages by timestamp
         query=messsageRef.document(eventID).collection("Messages")
                 .orderBy("timestamp", Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<Message> options=new FirestoreRecyclerOptions.Builder<Message>()
@@ -85,20 +85,20 @@ public class EventMessageFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
+    public void onStart() {//adapter start listening
         super.onStart();
         adapter.startListening();
 
     }
 
     @Override
-    public void onStop() {
+    public void onStop() {//adapter stop listening
         super.onStop();
         adapter.stopListening();
     }
 
 
-    public static void onFragmentResult(int requestCode, Intent data) {
+    public static void onFragmentResult(int requestCode, Intent data) {//new message data received from dialog fragment, pushes messsage to firestore
         // Make sure fragment codes match up
         if (requestCode == EventMessageFragment.REQUEST_CODE) {
 

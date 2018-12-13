@@ -77,7 +77,7 @@ public class ProfileFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,//creates the view for the profile fragment
                              Bundle savedInstanceState) {
 
 
@@ -140,7 +140,7 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){//creates an options menu inside profile fragment
         inflater.inflate(R.menu.profile_menu, menu);
 
         super.onCreateOptionsMenu(menu, inflater);
@@ -150,7 +150,7 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
-    public  boolean onOptionsItemSelected(MenuItem menuItem){
+    public  boolean onOptionsItemSelected(MenuItem menuItem){//case statement function to determine which menu item within options menu is selected and runs specified functions
         switch (menuItem.getItemId()){
             case R.id.logout_option:
                 logout();
@@ -175,14 +175,14 @@ public class ProfileFragment extends Fragment {
 
     //the code for this method should be changed
 
-    private void logout() {
+    private void logout() {//logs the user out
         mAuth.signOut();
         Intent myIntent = new Intent(getActivity(), MainActivity.class);
         startActivity(myIntent);
         getActivity().finish();
     }
 
-    private void requestHouse(){
+    private void requestHouse(){//switches to request house fragment to display all houses for user to request to join
         ListHouseFragment listHouseFragment=new ListHouseFragment();
         FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.user_frame, listHouseFragment);
@@ -190,7 +190,7 @@ public class ProfileFragment extends Fragment {
         fragmentTransaction.commit();
     }
 
-    private void deleteAccount(){
+    private void deleteAccount(){//deletes the user's account
         //code here
         db.collection("Users").document(currentUser.getEmail())
                 .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -205,7 +205,8 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
+    public void onStart() {//makes sure user's data is not null in Firestore so that the app doesnt force close
+                            //checks if user is an admin and if so shows the Requests button
         super.onStart();
         DocumentReference user=db.collection("Users").document(currentUser.getEmail());//chooses User's document
         user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {//gets data from document

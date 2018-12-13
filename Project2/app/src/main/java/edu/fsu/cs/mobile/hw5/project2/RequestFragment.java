@@ -50,7 +50,7 @@ public class RequestFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,//creates view
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v=inflater.inflate(R.layout.fragment_home, container, false);
@@ -58,7 +58,7 @@ public class RequestFragment extends Fragment {
         return v;
     }
 
-    private void setUpRecyclerView(View v, final Context c) {
+    private void setUpRecyclerView(View v, final Context c) {//creates recycler view to display all user's requesting to join the admins house
 
         FirestoreRecyclerOptions<User> options=new FirestoreRecyclerOptions.Builder<User>()
                 .setQuery(query, User.class)
@@ -73,12 +73,12 @@ public class RequestFragment extends Fragment {
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {//not implemented
                 return false;
             }
 
             @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {//on swiped, runs adapters approve user function to add them to the house
                 adapter.approveUser(viewHolder.getAdapterPosition(), house);
             }
         }).attachToRecyclerView(recyclerView);
@@ -87,7 +87,7 @@ public class RequestFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
+    public void onStart() {//builds the query to set up recycler view
         super.onStart();
 
         DocumentReference user=db.collection("Users").document(currentUser.getEmail());

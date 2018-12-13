@@ -57,7 +57,7 @@ public class HouseMessageComments extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {//creates view to display all comments inside a message
         v=inflater.inflate(R.layout.fragment_house_message_comments, container, false);
         Bundle bundle=this.getArguments();
         if(bundle!=null){
@@ -78,7 +78,7 @@ public class HouseMessageComments extends Fragment {
         return v;
     }
 
-    private void setUpRecyclerView(View v, final Context c) {
+    private void setUpRecyclerView(View v, final Context c) {//queries all comments within the specific message and displays them in order of time posted
         query=messsageRef.document(house).collection("Messages").document(commentID)
                 .collection("Comments")
                 .orderBy("timestamp", Query.Direction.DESCENDING);
@@ -94,19 +94,19 @@ public class HouseMessageComments extends Fragment {
     }
 
     @Override
-    public void onStart() {
+    public void onStart() {//start listening to adapter
         super.onStart();
         adapter.startListening();
 
     }
 
     @Override
-    public void onStop() {
+    public void onStop() {//stop listening to adapter
         super.onStop();
         adapter.stopListening();
     }
 
-    public static void onFragmentResult(int requestCode, Intent data) {
+    public static void onFragmentResult(int requestCode, Intent data) {//grabs comment data from dialog fragment and pushes to firestore
         // Make sure fragment codes match up
         if (requestCode == HouseMessageComments.REQUEST_CODE) {
 
