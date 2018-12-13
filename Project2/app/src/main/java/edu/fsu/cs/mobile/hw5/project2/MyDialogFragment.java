@@ -80,12 +80,10 @@ public class MyDialogFragment extends DialogFragment{
         builder.setMessage("Enter event name:");
         //builder.setPositiveButton("Create", mClickListener);
 
-
+        
         submit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-
-
                 if(checkInput(EventName.getText().toString(), EventLocation.getText().toString(),
                         date.getText().toString(), time.getText().toString()))
                 {

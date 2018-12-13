@@ -19,16 +19,19 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.User
     private OnItemClickListener listener;
     private FirebaseFirestore db=FirebaseFirestore.getInstance();
 
+    //must create this recycler view that listens to Firestore queries
     public UserAdapter(@NonNull FirestoreRecyclerOptions<User> options) {
         super(options);
     }
 
+    //binds object member data to the ViewHolder
     @Override
     protected void onBindViewHolder(@NonNull UserHolder holder, int position, @NonNull User model) {//binds the objects member data to the view holder
         holder.userEmail.setText(model.getUserEmail());
         holder.userName.setText(model.getUserName());
     }
 
+    //create the actual ViewHolder for the UserAdapter
     @NonNull
     @Override
     public UserHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {//creates the view holder
@@ -38,7 +41,8 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.User
 
     }
 
-    public void approveUser(final int adapterPosition, final String house) {//sets the user's house to the house requested and removes them from list of requestees that the admin sees
+    //sets the user's house to the house requested and removes them from list of requestees that the admin sees
+    public void approveUser(final int adapterPosition, final String house) {
         getSnapshots().getSnapshot(adapterPosition).getReference().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -56,7 +60,8 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.User
         TextView userEmail;//number
         TextView userName; //message
 
-        public UserHolder(View itemView) {//holder function for the card layout
+        //holder function for the card layout
+        public UserHolder(View itemView) {
             super(itemView);
             userEmail = itemView.findViewById(R.id.email_description);
             userName = itemView.findViewById(R.id.user_description);
@@ -64,7 +69,8 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.User
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION//protects from crash getting -1 position of a deleted item, -1 is dne
+                    //protects from crash getting -1 position of a deleted item, -1 is dne
+                    if (position != RecyclerView.NO_POSITION
                             && listener != null) {
                         listener.onItemClick(getSnapshots().getSnapshot(position), position);
                     }
@@ -74,12 +80,14 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.User
 
     }
 
-    public interface OnItemClickListener {//sets an interface for when the item is clicked
+    //sets an interface for when the item is clicked
+    public interface OnItemClickListener {
         void onItemClick(DocumentSnapshot documentSnapshot, int position);
     }
 
+    //sets a list click listener for an adapter
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
-    }//sets a list click listener for an adapter
+    }
 
 }

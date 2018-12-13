@@ -58,7 +58,8 @@ public class RequestFragment extends Fragment {
         return v;
     }
 
-    private void setUpRecyclerView(View v, final Context c) {//creates recycler view to display all user's requesting to join the admins house
+    //creates recycler view to display all user's requesting to join the admins house
+    private void setUpRecyclerView(View v, final Context c) {
 
         FirestoreRecyclerOptions<User> options=new FirestoreRecyclerOptions.Builder<User>()
                 .setQuery(query, User.class)
@@ -73,12 +74,15 @@ public class RequestFragment extends Fragment {
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {//not implemented
+            public boolean onMove(@NonNull RecyclerView recyclerView,
+                                  @NonNull RecyclerView.ViewHolder viewHolder,
+                                  @NonNull RecyclerView.ViewHolder viewHolder1) {//not implemented
                 return false;
             }
 
+            //on swiped, runs adapters approve user function to add them to the house
             @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {//on swiped, runs adapters approve user function to add them to the house
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 adapter.approveUser(viewHolder.getAdapterPosition(), house);
             }
         }).attachToRecyclerView(recyclerView);

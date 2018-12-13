@@ -24,15 +24,18 @@ public class MessageAdapter extends FirestoreRecyclerAdapter <Message, MessageAd
         super(options);
     }
 
+    //binds the objects member data to the view holder
     @Override
-    protected void onBindViewHolder(@NonNull MessageHolder holder, int position, @NonNull Message model) {//binds the objects member data to the view holder
+    protected void onBindViewHolder(@NonNull MessageHolder holder, int position, @NonNull Message model) {
         holder.title.setText(model.getMessage());
         holder.description.setText(model.getName());
     }
 
+
+    //creates the view holder
     @NonNull
     @Override
-    public MessageHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {//creates the view holder
+    public MessageHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.message_card,
                 viewGroup, false);
         return new MessageHolder(v);
@@ -42,7 +45,8 @@ public class MessageAdapter extends FirestoreRecyclerAdapter <Message, MessageAd
         TextView title;//number
         TextView description; //message
 
-        public  MessageHolder(View itemView){//holder function for the card layout
+        //holder function for the card layout
+        public  MessageHolder(View itemView){
             super(itemView);
             title=itemView.findViewById(R.id.text_title);
             description=itemView.findViewById(R.id.text_description);
@@ -50,7 +54,8 @@ public class MessageAdapter extends FirestoreRecyclerAdapter <Message, MessageAd
                 @Override
                 public void onClick(View v) {
                     int position=getAdapterPosition();
-                    if(position!=RecyclerView.NO_POSITION//protects from crash getting -1 position of a deleted item, -1 is dne
+                    //protects from crash getting -1 position of a deleted item, -1 is dne
+                    if(position!=RecyclerView.NO_POSITION
                             && listener!=null){
                         listener.onItemClick(getSnapshots().getSnapshot(position), position);
                     }
@@ -60,10 +65,12 @@ public class MessageAdapter extends FirestoreRecyclerAdapter <Message, MessageAd
 
 
     }
-    public interface OnItemClickListener{//interface fo when an item is clicked
+    //interface fo when an item is clicked
+    public interface OnItemClickListener{
         void onItemClick(DocumentSnapshot documentSnapshot, int position);
     }
-    public void setOnItemClickListener(OnItemClickListener listener){//sets a click listener for an adapter
+    //sets a click listener for an adapter
+    public void setOnItemClickListener(OnItemClickListener listener){
         this.listener=listener;
     }//sets a list click listener for an adapter
 }

@@ -25,9 +25,9 @@ public class NavActivity extends AppCompatActivity {
     private ProfileFragment profileFragment;
 
 
-
+    //creates activity that has bottom tab navigation to navigate between tabs
     @Override
-    protected void onCreate(Bundle savedInstanceState) {//creates activity that has bottom tab navigation to navigate between tabs
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav);
 
