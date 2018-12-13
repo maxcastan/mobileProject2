@@ -60,6 +60,7 @@ public class MyDialogFragment extends DialogFragment{
 
 
 
+    //when dialog is created, attach UI components to their respective objects
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -80,7 +81,9 @@ public class MyDialogFragment extends DialogFragment{
         builder.setMessage("Enter event name:");
         //builder.setPositiveButton("Create", mClickListener);
 
-        
+
+        //when submit button is pressed, check that all input is correct and then send results
+        //to SocialFragment
         submit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -127,6 +130,7 @@ public class MyDialogFragment extends DialogFragment{
 
     };*/
 
+//error checks on all appropriate inputs
     private boolean checkInput(String e, String l, String d, String t) {
             if (e.isEmpty()) {
                 EventName.setError("Please enter an event location");
