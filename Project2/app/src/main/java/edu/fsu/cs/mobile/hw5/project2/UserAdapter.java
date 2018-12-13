@@ -24,21 +24,21 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.User
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull UserHolder holder, int position, @NonNull User model) {
+    protected void onBindViewHolder(@NonNull UserHolder holder, int position, @NonNull User model) {//binds the objects member data to the view holder
         holder.userEmail.setText(model.getUserEmail());
         holder.userName.setText(model.getUserName());
     }
 
     @NonNull
     @Override
-    public UserHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public UserHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {//creates the view holder
         View v=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.user_card,
                 viewGroup, false);
         return new UserHolder(v);
 
     }
 
-    public void approveUser(final int adapterPosition, final String house) {
+    public void approveUser(final int adapterPosition, final String house) {//sets the user's house to the house requested and removes them from list of requestees that the admin sees
         getSnapshots().getSnapshot(adapterPosition).getReference().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -52,20 +52,11 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.User
     }
 
 
-    /*              NOT SURE WHAT TO REPLACE R.LAYOUT.MESSAGE_CARD WITH
-    @NonNull
-    @Override
-    public UserHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-
-    }
-    */
-
-
     class UserHolder extends RecyclerView.ViewHolder {
         TextView userEmail;//number
         TextView userName; //message
 
-        public UserHolder(View itemView) {
+        public UserHolder(View itemView) {//holder function for the card layout
             super(itemView);
             userEmail = itemView.findViewById(R.id.email_description);
             userName = itemView.findViewById(R.id.user_description);
@@ -83,12 +74,12 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.User
 
     }
 
-    public interface OnItemClickListener {
+    public interface OnItemClickListener {//sets an interface for when the item is clicked
         void onItemClick(DocumentSnapshot documentSnapshot, int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
-    }
+    }//sets a list click listener for an adapter
 
 }

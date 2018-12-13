@@ -25,14 +25,14 @@ public class MessageAdapter extends FirestoreRecyclerAdapter <Message, MessageAd
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull MessageHolder holder, int position, @NonNull Message model) {
+    protected void onBindViewHolder(@NonNull MessageHolder holder, int position, @NonNull Message model) {//binds the objects member data to the view holder
         holder.title.setText(model.getMessage());
         holder.description.setText(model.getName());
     }
 
     @NonNull
     @Override
-    public MessageHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public MessageHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {//creates the view holder
         View v=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.message_card,
                 viewGroup, false);
         return new MessageHolder(v);
@@ -42,7 +42,7 @@ public class MessageAdapter extends FirestoreRecyclerAdapter <Message, MessageAd
         TextView title;//number
         TextView description; //message
 
-        public  MessageHolder(View itemView){
+        public  MessageHolder(View itemView){//holder function for the card layout
             super(itemView);
             title=itemView.findViewById(R.id.text_title);
             description=itemView.findViewById(R.id.text_description);
@@ -60,10 +60,10 @@ public class MessageAdapter extends FirestoreRecyclerAdapter <Message, MessageAd
 
 
     }
-    public interface OnItemClickListener{
+    public interface OnItemClickListener{//interface fo when an item is clicked
         void onItemClick(DocumentSnapshot documentSnapshot, int position);
     }
-    public void setOnItemClickListener(OnItemClickListener listener){
+    public void setOnItemClickListener(OnItemClickListener listener){//sets a click listener for an adapter
         this.listener=listener;
-    }
+    }//sets a list click listener for an adapter
 }

@@ -25,14 +25,14 @@ public class HouseAdapter extends FirestoreRecyclerAdapter<House, HouseAdapter.H
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull HouseHolder holder, int position, @NonNull House model) {
+    protected void onBindViewHolder(@NonNull HouseHolder holder, int position, @NonNull House model) {//binds the objects member data to the view holder
         holder.houseName.setText(model.getName());
 
     }
 
     @NonNull
     @Override
-    public HouseHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public HouseHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {//creates the view holder
         View v=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.house_card,
                 viewGroup, false);
         return new HouseAdapter.HouseHolder(v);
@@ -42,7 +42,7 @@ public class HouseAdapter extends FirestoreRecyclerAdapter<House, HouseAdapter.H
     class HouseHolder extends RecyclerView.ViewHolder {
         TextView houseName;
 
-        public HouseHolder(View itemView) {
+        public HouseHolder(View itemView) {//holder function for the card layout
             super(itemView);
             houseName=itemView.findViewById(R.id.house_name);
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +63,7 @@ public class HouseAdapter extends FirestoreRecyclerAdapter<House, HouseAdapter.H
         void onItemClick(DocumentSnapshot documentSnapshot, int position);
     }
 
-    public void setOnItemClickListener(UserAdapter.OnItemClickListener listener) {
+    public void setOnItemClickListener(UserAdapter.OnItemClickListener listener) {//sets a  click listener for an adapter
         this.listener = listener;
     }
 }

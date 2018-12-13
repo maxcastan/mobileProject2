@@ -25,7 +25,7 @@ public class EventAdapter extends FirestoreRecyclerAdapter <Event, EventAdapter.
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull EventHolder holder, int position, @NonNull Event model) {
+    protected void onBindViewHolder(@NonNull EventHolder holder, int position, @NonNull Event model) {//binds the objects member data to the view holder
         holder.title.setText(model.getTitle());
         holder.address.setText(model.getAddress());
         holder.timestamp.setText(model.getTimestamp().toDate().toString());
@@ -33,17 +33,17 @@ public class EventAdapter extends FirestoreRecyclerAdapter <Event, EventAdapter.
 
     @NonNull
     @Override
-    public EventHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {//
+    public EventHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {//creates the view holder
         View v=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.event_card,
                 viewGroup, false);
         return new EventAdapter.EventHolder(v);    }
 
-    class EventHolder extends RecyclerView.ViewHolder {//holder function for the event card layout
+    class EventHolder extends RecyclerView.ViewHolder {
         TextView title;//title
         TextView address; //address
         TextView timestamp; //timestamp
 
-        public  EventHolder(View itemView){
+        public  EventHolder(View itemView){//holder function for the card layout
             super(itemView);
             title=itemView.findViewById(R.id.event_title);
             address=itemView.findViewById(R.id.event_address);
@@ -65,7 +65,7 @@ public class EventAdapter extends FirestoreRecyclerAdapter <Event, EventAdapter.
     public interface OnItemClickListener{
         void onItemClick(DocumentSnapshot documentSnapshot, int position);
     }
-    public void setOnItemClickListener(MessageAdapter.OnItemClickListener listener){//sets a list click listener for an adapter
+    public void setOnItemClickListener(MessageAdapter.OnItemClickListener listener){//sets a  click listener for an adapter
         this.listener=listener;
     }
 }

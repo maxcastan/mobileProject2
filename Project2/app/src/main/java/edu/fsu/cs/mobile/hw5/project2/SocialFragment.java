@@ -60,7 +60,7 @@ public class SocialFragment extends Fragment{
 
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,//creates the view with a floating action button
                              Bundle savedInstanceState) {
         v=inflater.inflate(R.layout.fragment_social, container, false);
 
@@ -78,7 +78,7 @@ public class SocialFragment extends Fragment{
 
         return v;
     }
-    private void setUpRecyclerView(View v, final Context c) {
+    private void setUpRecyclerView(View v, final Context c) {//sets up recycler view and adds a click listener to events so that posts can be viewed within the event
 
         FirestoreRecyclerOptions<Event> options=new FirestoreRecyclerOptions.Builder<Event>()
                 .setQuery(query, Event.class)
@@ -106,7 +106,7 @@ public class SocialFragment extends Fragment{
     }
 
     @Override
-    public void onStart() {
+    public void onStart() {//creates the query to pull events from firebase
         super.onStart();
         DocumentReference user=db.collection("Users").document(currentUser.getEmail());
         user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -119,7 +119,8 @@ public class SocialFragment extends Fragment{
                 }
                 query=eventRef.whereArrayContains("Invited", house);
                     //    .orderBy("timestamp", Query.Direction.DESCENDING);
-
+                    //this is commented out because it was causing a bug where data would not show up
+                    //if ordered before whereArrayContains events show up multiple times
                 setUpRecyclerView(v, getContext());
                 adapter.startListening();
             }
@@ -130,7 +131,7 @@ public class SocialFragment extends Fragment{
     }
 
     @Override
-    public void onStop() {
+    public void onStop() {//run to have the adapter stop listening
         super.onStop();
         adapter.stopListening();
     }

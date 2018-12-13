@@ -12,7 +12,7 @@ public class User {
         //empty constructor needed for firebase
     }
 
-    public User(String userEmail, String userName){
+    public User(String userEmail, String userName){//constructs the user object
         this.userEmail = userEmail;
         this.userName = userName;
     }

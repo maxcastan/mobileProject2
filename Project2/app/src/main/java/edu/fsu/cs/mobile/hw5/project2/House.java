@@ -7,7 +7,7 @@ public class House {
 
     public House(String name) {
         this.name = name;
-    }
+    }//constructs the house object
 
     public String getName() {
         return name;

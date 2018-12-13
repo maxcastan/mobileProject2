@@ -9,7 +9,7 @@ public class Message {
 
     public Message(){}
 
-    public Message(String message, String name) {
+    public Message(String message, String name) {//constructs the message object
         this.message = message;
         this.name = name;
     }

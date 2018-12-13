@@ -62,7 +62,7 @@ public class HomeFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,//creates  a layout with a floating action button
                              Bundle savedInstanceState) {
 
         v=inflater.inflate(R.layout.fragment_home, container, false);
@@ -78,8 +78,8 @@ public class HomeFragment extends Fragment {
         });
         return v;
     }
-    private void setUpRecyclerView(View v, final Context c) {
-
+    private void setUpRecyclerView(View v, final Context c) {//sets up the recycler view inside the home fragment layout
+                                                            //In addition, it sets an item click listener for the message adapter so that comments can be displayed
         FirestoreRecyclerOptions<Message> options=new FirestoreRecyclerOptions.Builder<Message>()
                 .setQuery(query, Message.class)
                 .build();
@@ -107,7 +107,7 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
+    public void onStart() {//overridden onStart function is used to set up the query for the recycler view as well as have the adapter start listening once this is done
         super.onStart();
 
         DocumentReference user=db.collection("Users").document(currentUser.getEmail());
@@ -132,7 +132,7 @@ public class HomeFragment extends Fragment {
 
     }
 
-    public static void onFragmentResult(int requestCode, Intent data) {
+    public static void onFragmentResult(int requestCode, Intent data) {//catches the message info from the dialog fragment and pushes it to the database
         // Make sure fragment codes match up
         if (requestCode == MessageDialogFragment.REQUEST_CODE) {
             String msg= null;
@@ -152,7 +152,7 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onStop() {
+    public void onStop() {//when app stops the adapter stops listening
         super.onStop();
         adapter.stopListening();
     }
