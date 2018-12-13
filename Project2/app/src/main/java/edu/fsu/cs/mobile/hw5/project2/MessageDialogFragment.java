@@ -2,16 +2,12 @@ package edu.fsu.cs.mobile.hw5.project2;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -31,6 +27,8 @@ public class MessageDialogFragment extends DialogFragment {
         // Required empty public constructor
     }
 
+
+    // When dialog is created, attach UI components to their respective objects
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -40,22 +38,14 @@ public class MessageDialogFragment extends DialogFragment {
         msg = rootView.findViewById(R.id.msg);
         submit = rootView.findViewById(R.id.msg_submit);
         final int code = getTargetRequestCode();
-
         builder.setView(rootView);
         builder.setTitle("Enter a message:");
+
         submit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
 
-
                 sendResult(code);
-
-               /* if(code == HomeFragment.REQUEST_CODE)
-                    sendResult(HomeFragment.REQUEST_CODE);
-                if (code == HouseMessageComments.REQUEST_CODE)
-                    sendResult(HouseMessageComments.REQUEST_CODE);
-                if (code == EventMessageFragment.REQUEST_CODE)
-                    sendResult(EventMessageFragment.REQUEST_CODE);*/
                 dismiss();
 
 
@@ -66,6 +56,8 @@ public class MessageDialogFragment extends DialogFragment {
         return builder.create();
     }
 
+    // Checks the number received from parent fragment and it sends the bundle back to the fragment that
+    // matches the number.
     private void sendResult(int REQUEST_CODE) {
         Intent intent = new Intent();
         Bundle b = new Bundle();

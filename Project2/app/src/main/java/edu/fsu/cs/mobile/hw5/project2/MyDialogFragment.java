@@ -1,37 +1,20 @@
 package edu.fsu.cs.mobile.hw5.project2;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.TimePickerDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
-
 import android.widget.Button;
 import android.widget.EditText;
-
 import android.widget.Spinner;
-import android.widget.Toast;
-
 import java.text.ParseException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 public class MyDialogFragment extends DialogFragment{
 
@@ -48,9 +31,6 @@ public class MyDialogFragment extends DialogFragment{
     private EditText EventLocation;
     private EditText date;
     private EditText time;
-    private Button submit;
-    private String house;
-    //private int REQUEST_CODE;
 
     Spinner housespinner;
 
@@ -71,15 +51,12 @@ public class MyDialogFragment extends DialogFragment{
         EventLocation = rootView.findViewById(R.id.enterLocation);
         time = rootView.findViewById(R.id.inputTime);
         date = rootView.findViewById(R.id.inputDate);
-        submit = rootView.findViewById(R.id.submit);
-        //REQUEST_CODE = getParentFragment().REQUEST_CODE;
-        //spinner
+        Button submit = rootView.findViewById(R.id.submit);
         housespinner = rootView.findViewById(R.id.HousesList);
         String[] housesInArray = getResources().getStringArray(R.array.housesarray);
         builder.setView(rootView);
         builder.setTitle("Create Event");
         builder.setMessage("Enter event name:");
-        //builder.setPositiveButton("Create", mClickListener);
 
 
         //when submit button is pressed, check that all input is correct and then send results
@@ -113,22 +90,6 @@ public class MyDialogFragment extends DialogFragment{
         return builder.create();
     }
 
-/*
-    private DialogInterface.OnClickListener mClickListener = new DialogInterface.OnClickListener() {
-
-
-
-
-        @Override
-        public void onClick(DialogInterface dialogInterface, int which) {
-            if (which == DialogInterface.BUTTON_POSITIVE) {
-                checkInput(EventName.getText().toString(), EventLocation.getText().toString(),
-                        date.getText().toString(), time.getText().toString());
-                sendResult(SocialFragment.REQUEST_CODE);
-            }
-        }
-
-    };*/
 
 //error checks on all appropriate inputs
     private boolean checkInput(String e, String l, String d, String t) {
@@ -248,6 +209,7 @@ public class MyDialogFragment extends DialogFragment{
             return true;
     }
 
+    // Sends the bundle back to event fragment.
     private void sendResult(int REQUEST_CODE) throws ParseException {
         Intent intent = new Intent();
         Bundle b = new Bundle();
